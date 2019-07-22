@@ -1,0 +1,8 @@
+*.DS_Store
+*.iml
+*.plan
+*.terraform
+*.tfstate*
+*.log
+*.lock.info
+*/ssh_keys/*
