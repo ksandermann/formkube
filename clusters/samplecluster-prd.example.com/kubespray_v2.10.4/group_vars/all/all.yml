@@ -1,0 +1,126 @@
+---
+##################################################### GENERAL ##########################################################
+## Directory where etcd data stored
+etcd_data_dir: /var/lib/etcd
+
+## Directory where the binaries will be installed
+bin_dir: /usr/local/bin
+
+## The access_ip variable is used to define how other nodes should access
+## the node.  This is used in flannel to allow other flannel nodes to see
+## this node for example.  The access_ip is really useful AWS and Google
+## environments where the nodes are accessed remotely by the "public" ip,
+## but don't know about that address themselves.
+# access_ip: 1.1.1.1
+
+##################################################### LOADBALANCER #####################################################
+## External LB example config
+apiserver_loadbalancer_domain_name: "alb.samplecluster-prd.example.com"
+loadbalancer_apiserver:
+# has to be adjusted
+  address: "52.156.205.199"
+  port: 6443
+
+## Internal loadbalancers for apiservers
+# loadbalancer_apiserver_localhost: true
+# valid options are "nginx" or "haproxy"
+# loadbalancer_apiserver_type: nginx # valid values "nginx" or "haproxy"
+
+## Local loadbalancer should use this port instead, if defined.
+## Defaults to kube_apiserver_port (6443)
+#nginx_kube_apiserver_port: 8443
+
+## Local loadbalancer should use this port
+## And must be set port 6443
+loadbalancer_apiserver_port: 6443
+
+## If loadbalancer_apiserver_healthcheck_port variable defined, enables proxy liveness check for nginx.
+#loadbalancer_apiserver_healthcheck_port: 8081
+
+
+##################################################### KUBELET ##########################################################
+
+### OTHER OPTIONAL VARIABLES
+## For some things, kubelet needs to load kernel modules.  For example, dynamic kernel services are needed
+## for mounting persistent volumes into containers.  These may not be loaded by preinstall kubernetes
+## processes.  For example, ceph and rbd backed volumes.  Set to true to allow kubelet to load kernel
+## modules.
+kubelet_load_modules: true
+
+## The read-only port for the Kubelet to serve on with no authentication/authorization. Uncomment to enable.
+# kube_read_only_port: 10255
+
+# MIGRATED FROM OLD INVENTORY -> MAY BE DEPRECATED
+## kubelet authentication token webhook (default false)
+#kubelet_authentication_token_webhook: true
+
+##################################################### DNS ##############################################################
+
+## Upstream dns servers
+# set Azure NS servers here
+#upstream_dns_servers:
+#  - 1.1.1.1
+#  - 1.0.0.1
+
+##################################################### CLOUD PROVIDER ###################################################
+
+## There are some changes specific to the cloud providers
+## for instance we need to encapsulate packets with some network plugins
+## If set the possible values are either 'gce', 'aws', 'azure', 'openstack', 'vsphere', 'oci', or 'external'
+## When openstack is used make sure to source in the openstack credentials
+## like you would do when using openstack-client before starting the playbook.
+## Note: The 'external' cloud provider is not supported.
+## TODO(riverzhang): https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/#running-cloud-controller-manager
+# cloud_provider:
+
+##################################################### PROXY ############################################################
+
+
+## Refer to roles/kubespray-defaults/defaults/main.yml before modifying no_proxy
+#no_proxy: ""
+
+## If you need exclude all cluster nodes from proxy and other resources, add other resources here.
+additional_no_proxy: "127.0.0.1, 127.0.1.1, localhost, local.home, .samplecluster-prd.example.com, .example.com"
+
+##################################################### WEAVE ############################################################
+# Enable kubernetes network policies
+enable_network_policy: true
+
+##################################################### KUBEADM ##########################################################
+# MAY BE DEPRECATED -> SET JUST TO BE SURE
+## kubeadm deployment mode
+kubeadm_enabled: true
+
+# Skip alert information
+skip_non_kubeadm_warning: false
+
+##################################################### CERTS ############################################################
+
+## Some problems may occur when downloading files over https proxy due to ansible bug
+## https://github.com/ansible/ansible/issues/32750. Set this variable to False to disable
+## SSL validation of get_url module. Note that kubespray will still be performing checksum validation.
+download_validate_certs: False
+
+
+## Certificate Management
+## This setting determines whether certs are generated via scripts.
+## Chose 'none' if you provide your own certificates.
+## Option is  "script", "none"
+## note: vault is removed
+cert_management: script
+
+##################################################### BOOTSTRAPPING ####################################################
+
+## Set to true to allow pre-checks to fail and continue deployment
+ignore_assert_errors: false
+
+## Set true to download and cache container
+# download_container: true
+
+## Deploy container engine
+# Set false if you want to deploy container engine manually.
+# deploy_container_engine: true
+
+## Set Pypi repo and cert accordingly
+# pyrepo_index: https://pypi.example.com/simple
+# pyrepo_cert: /etc/ssl/certs/ca-certificates.crt
