@@ -4,7 +4,7 @@ resource "azurerm_dns_a_record" "bastions" {
   zone_name           = var.out_platform_dns_zone_name
   resource_group_name = var.out_platform_rg_name
   ttl                 = 300
-  records             = [azurerm_network_interface.bastions.*.ip_configuration.0.private_ip_address[count.index]]
+  records             = [azurerm_public_ip.bastions.*.ip_address[count.index]]
   tags                = var.platform_resource_tags
 
 }

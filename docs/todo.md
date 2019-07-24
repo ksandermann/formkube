@@ -11,6 +11,14 @@ always source this in apply.sh and
 source this in destroy.sh if plan file is not present.
 Need to be aware of development mode features
 
+* [ ] investigate on azure os disk size + filesystem size
+
+* [ ] azure disk encryption
+
+* [ ] don't destroy DNS zone
+
+* [ ] make cluster config path configurable
+
 # DONE 
 
 This list is just kept for development documentation purposes.
