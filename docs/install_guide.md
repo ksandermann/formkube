@@ -8,7 +8,7 @@
 
 1. Run the following inside bash in the repository's root directory:
     ```bash
-    ./scripts/deploy.sh
+    ./scripts/apply.sh
     ```
 
 # Authors

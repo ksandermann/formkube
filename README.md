@@ -51,7 +51,7 @@ It is basically the result of me teaching myself Terraform and Azure. :)
     export FORMKUBE_CLIENT_ID=abcde-abcde-abcde-abcde
     export FORMKUBE_CLIENT_SECRET=abcde-abcde-abcde-abcde
     export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcde
-    bash ./scripts/deploy.sh
+    bash ./scripts/apply.sh
     ```
 
 
