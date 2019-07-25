@@ -1,4 +1,4 @@
-resource "azurerm_dns_zone" "cluster" {
+resource "azurerm_dns_zone" "platform" {
   name                = var.cluster_fqdn
   resource_group_name = azurerm_resource_group.platform.name
   zone_type           = "Public"

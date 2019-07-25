@@ -22,6 +22,9 @@ else
     echo "removing backup vault from statefile..."
     terraform state rm -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate module.backup.azurerm_recovery_services_vault.platform  &>/dev/null
 
+    echo "removing dns zone from statefile..."
+    terraform state rm -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate module.essentials.azurerm_dns_zone.platform  &>/dev/null
+
     echo "removing resource group from statefile..."
     terraform state rm -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate module.essentials.azurerm_resource_group.platform  &>/dev/null
 
