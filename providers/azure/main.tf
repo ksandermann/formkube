@@ -117,6 +117,7 @@ module "bastions" {
 
   //bastions
   bastions_amount = var.bastions_amount
+  bastions_fault_domains = var.bastions_fault_domains
   bastions_admin_username = var.bastions_admin_username
   bastions_pub_key_controller_path = var.bastions_pub_key_controller_path
 
@@ -135,6 +136,7 @@ module "bastions" {
   //dependencies
   out_platform_rg_name = module.essentials.out_platform_rg_name
   out_bastions_subnet_nics_ids = module.vnet.out_bastions_nics_ids
+
 
 }
 
