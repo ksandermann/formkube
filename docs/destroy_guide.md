@@ -14,6 +14,7 @@ The following resources will **not** be destroyed when running FormKube's destro
 
 1. Backup vault including backups
 1. Resource Group defined in *platform_rg_name*
+1. DNS zone
 1. If *masters_os_disk_delete_on_destroy* is **not** explicitly to *true*, the OS disks of the masters will also not be
 destroyed.
 
