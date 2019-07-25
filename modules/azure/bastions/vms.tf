@@ -1,6 +1,6 @@
 resource "azurerm_availability_set" "bastions" {
-  name                          = "${var.bastions_vm_prefix}s.${var.cluster_fqdn}"
-  location                      = var.cluster_location
+  name                          = "${var.bastions_vm_prefix}s.${var.platform_fqdn}"
+  location                      = var.platform_location
   resource_group_name           = var.out_platform_rg_name
   managed                       = true
   platform_fault_domain_count   = var.bastions_fault_domains
@@ -12,8 +12,8 @@ resource "azurerm_availability_set" "bastions" {
 
 resource "azurerm_virtual_machine" "bastions" {
   count                             = var.bastions_amount
-  name                              = "${var.bastions_vm_prefix}${count.index +1}.${var.cluster_fqdn}"
-  location                          = var.cluster_location
+  name                              = "${var.bastions_vm_prefix}${count.index +1}.${var.platform_fqdn}"
+  location                          = var.platform_location
   resource_group_name               = var.out_platform_rg_name
   network_interface_ids             = [var.out_bastions_subnet_nics_ids[count.index]]
   primary_network_interface_id      =  var.out_bastions_subnet_nics_ids[count.index]
@@ -32,7 +32,7 @@ resource "azurerm_virtual_machine" "bastions" {
   }
 
   storage_os_disk {
-    name                            = "${var.bastions_vm_prefix}${count.index +1}.${var.cluster_fqdn}-${var.bastions_os_disk_suffix}"
+    name                            = "${var.bastions_vm_prefix}${count.index +1}.${var.platform_fqdn}-${var.bastions_os_disk_suffix}"
     caching                         = "None"
     create_option                   = "FromImage"
     managed_disk_type               = var.bastions_os_disk_type
@@ -42,7 +42,7 @@ resource "azurerm_virtual_machine" "bastions" {
   }
 
   os_profile {
-    computer_name                   = "${var.bastions_vm_prefix}${count.index +1}.${var.cluster_fqdn}"
+    computer_name                   = "${var.bastions_vm_prefix}${count.index +1}.${var.platform_fqdn}"
     admin_username                  = var.bastions_admin_username
     admin_password                  = ""
   }

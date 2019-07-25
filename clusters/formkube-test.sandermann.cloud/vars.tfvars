@@ -33,6 +33,7 @@ platform_resource_tags_additional={"ClusterType" = "K8S_14.03"}
 /////////////////////////////////////////////////////BASTIONS///////////////////////////////////////////////////////////
 
 bastions_amount="1"
+bastions_fault_domains = "2"
 bastions_vm_type="Standard_DS1_v2"
 bastions_vm_prefix="bastion"
 bastions_admin_username="kevin"
@@ -48,6 +49,7 @@ bastions_os_image_version="latest"
 /////////////////////////////////////////////////////MASTERS////////////////////////////////////////////////////////////
 
 masters_amount="0"
+masters_fault_domains = "2"
 masters_vm_type="Standard_DS1_v2"
 masters_vm_prefix="master"
 masters_admin_username="kevin"
