@@ -6,5 +6,4 @@ resource "azurerm_public_ip" "bastions" {
   ip_version          = "IPv4"
   allocation_method   = "Static"
   tags                = var.platform_resource_tags
-  zones               = [(count.index%3)+1]
 }
