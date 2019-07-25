@@ -1,6 +1,6 @@
 resource "azurerm_availability_set" "computenodes" {
   name                          = "${var.computenodes_vm_prefix}s.${var.cluster_fqdn}"
-  location                      = var.platform_resource_tags
+  location                      = var.platform_location
   resource_group_name           = var.out_platform_rg_name
   managed                       = true
   platform_fault_domain_count   = var.computenodes_fault_domains
