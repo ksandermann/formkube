@@ -66,6 +66,7 @@ masters_os_image_version="latest"
 /////////////////////////////////////////////////////COMPUTENODES///////////////////////////////////////////////////////
 
 computenodes_amount="3"
+computenodes_fault_domains = "2"
 computenodes_vm_type="Standard_D8_v3"
 computenodes_vm_prefix="computenode"
 computenodes_admin_username="clusteradmin"
@@ -81,6 +82,7 @@ computenodes_os_image_version="latest"
 /////////////////////////////////////////////////////INFRANODES/////////////////////////////////////////////////////////
 
 infranodes_amount="3"
+infranodes_fault_domains = "2"
 infranodes_vm_type="Standard_D8_v3"
 infranodes_vm_prefix="infranode"
 infranodes_admin_username="clusteradmin"
