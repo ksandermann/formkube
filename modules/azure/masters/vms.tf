@@ -1,16 +1,3 @@
-resource "azurerm_availability_set" "masters" {
-  name                          = "${var.masters_vm_prefix}s.${var.cluster_fqdn}"
-  location                      = var.platform_resource_tags
-  resource_group_name           = var.out_platform_rg_name
-  managed                       = true
-  platform_fault_domain_count   = var.masters_fault_domains
-  //more than 6 masters doesn't make sense
-  platform_update_domain_count  = (var.masters_fault_domains > 1) ? 6 : 3
-  tags                          = var.platform_resource_tags
-
-}
-
-
 resource "azurerm_virtual_machine" "masters" {
   count                             = var.masters_amount
   name                              = "${var.masters_vm_prefix}${count.index +1}.${var.cluster_fqdn}"
@@ -22,6 +9,7 @@ resource "azurerm_virtual_machine" "masters" {
   delete_os_disk_on_termination     = var.masters_os_disk_delete_on_destroy
   delete_data_disks_on_termination  = true
   availability_set_id               = azurerm_availability_set.masters.id
+  depends_on                        = [azurerm_availability_set.masters]
 
   //LRS for OS disks is sufficient as application data will be placed on seperate disks anyway
   storage_image_reference {

@@ -1,15 +1,3 @@
-resource "azurerm_availability_set" "bastions" {
-  name                          = "${var.bastions_vm_prefix}s.${var.platform_fqdn}"
-  location                      = var.platform_location
-  resource_group_name           = var.out_platform_rg_name
-  managed                       = true
-  platform_fault_domain_count   = var.bastions_fault_domains
-  platform_update_domain_count  = (var.bastions_fault_domains > 1)  ? 3 : 2
-  tags                          = var.cluster_resource_tags
-
-}
-
-
 resource "azurerm_virtual_machine" "bastions" {
   count                             = var.bastions_amount
   name                              = "${var.bastions_vm_prefix}${count.index +1}.${var.platform_fqdn}"
@@ -22,6 +10,7 @@ resource "azurerm_virtual_machine" "bastions" {
   delete_os_disk_on_termination     = true
   delete_data_disks_on_termination  = true
   availability_set_id               = azurerm_availability_set.bastions.id
+  depends_on                        = [azurerm_availability_set.bastions]
 
   //LRS for OS disks is sufficient as bastion functionality is not crucial for cluster operations
   storage_image_reference {
