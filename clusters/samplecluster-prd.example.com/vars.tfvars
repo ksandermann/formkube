@@ -50,7 +50,7 @@ bastions_os_image_version="latest"
 
 masters_amount="3"
 masters_fault_domains = "2"
-masters_vm_type="Standard_D4_v3"
+masters_vm_type="Standard_D4s_v3"
 masters_vm_prefix="master"
 masters_admin_username="clusteradmin"
 masters_os_disk_delete_on_destroy=false
@@ -67,7 +67,7 @@ masters_os_image_version="latest"
 
 computenodes_amount="3"
 computenodes_fault_domains = "2"
-computenodes_vm_type="Standard_D8_v3"
+computenodes_vm_type="Standard_D8s_v3"
 computenodes_vm_prefix="computenode"
 computenodes_admin_username="clusteradmin"
 
@@ -83,7 +83,7 @@ computenodes_os_image_version="latest"
 
 infranodes_amount="3"
 infranodes_fault_domains = "2"
-infranodes_vm_type="Standard_D8_v3"
+infranodes_vm_type="Standard_D8s_v3"
 infranodes_vm_prefix="infranode"
 infranodes_admin_username="clusteradmin"
 
