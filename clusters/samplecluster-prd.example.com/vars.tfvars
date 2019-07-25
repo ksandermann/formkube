@@ -49,6 +49,7 @@ bastions_os_image_version="latest"
 /////////////////////////////////////////////////////MASTERS////////////////////////////////////////////////////////////
 
 masters_amount="3"
+masters_fault_domains = "2"
 masters_vm_type="Standard_D4_v3"
 masters_vm_prefix="master"
 masters_admin_username="clusteradmin"
