@@ -181,6 +181,7 @@ module "nodes" {
 
   //computenodes
   computenodes_amount = var.computenodes_amount
+  computenodes_fault_domains = var.computenodes_fault_domains
   computenodes_vm_type = var.computenodes_vm_type
   computenodes_vm_prefix = var.computenodes_vm_prefix
   computenodes_os_disk_suffix = var.computenodes_os_disk_suffix
@@ -196,6 +197,7 @@ module "nodes" {
 
   //infranodes
   infranodes_amount = var.infranodes_amount
+  infranodes_fault_domains = var.infranodes_fault_domains
   infranodes_vm_type = var.infranodes_vm_type
   infranodes_vm_prefix = var.infranodes_vm_prefix
   infranodes_os_disk_suffix = var.infranodes_os_disk_suffix
@@ -212,6 +214,8 @@ module "nodes" {
   out_platform_rg_name = module.essentials.out_platform_rg_name
   out_computenodes_nics_ids = module.vnet.out_computenodes_nics_ids
   out_infranodes_nics_ids = module.vnet.out_infranodes_nics_ids
+
+
 
 }
 

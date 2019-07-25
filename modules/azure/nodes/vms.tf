@@ -5,11 +5,11 @@ resource "azurerm_virtual_machine" "computenodes" {
   resource_group_name               = var.out_platform_rg_name
   network_interface_ids             = [var.out_computenodes_nics_ids[count.index]]
   vm_size                           = var.computenodes_vm_type
-  //use modulo 3 as only regions with 3 av. zones are supported
-  zones                             = [(count.index%3)+1]
   tags                              = var.platform_resource_tags
   delete_os_disk_on_termination     = true
   delete_data_disks_on_termination  = true
+  availability_set_id               = azurerm_availability_set.computenodes.id
+  depends_on                        = [azurerm_availability_set.computenodes]
 
   //LRS for OS disks is sufficient as application data will be placed on seperate disks anyway
   storage_image_reference {
@@ -42,6 +42,13 @@ resource "azurerm_virtual_machine" "computenodes" {
       path                          = "/home/${var.computenodes_admin_username}/.ssh/authorized_keys"
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      "storage_os_disk",
+      "storage_data_disk",
+    ]
+  }
 }
 
 
@@ -52,11 +59,11 @@ resource "azurerm_virtual_machine" "infranodes" {
   resource_group_name               = var.out_platform_rg_name
   network_interface_ids             = [var.out_infranodes_nics_ids[count.index]]
   vm_size                           = var.infranodes_vm_type
-  //use modulo 3 as only regions with 3 av. zones are supported
-  zones                             = [(count.index%3)+1]
   tags                              = var.platform_resource_tags
   delete_os_disk_on_termination     = true
   delete_data_disks_on_termination  = true
+  availability_set_id               = azurerm_availability_set.infranodes.id
+  depends_on                        = [azurerm_availability_set.infranodes]
 
   storage_image_reference {
     publisher                       = var.infranodes_os_image_publisher
@@ -87,5 +94,12 @@ resource "azurerm_virtual_machine" "infranodes" {
       key_data                      = file(var.infranodes_pub_key_controller_path)
       path                          = "/home/${var.infranodes_admin_username}/.ssh/authorized_keys"
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      "storage_os_disk",
+      "storage_data_disk",
+    ]
   }
 }
