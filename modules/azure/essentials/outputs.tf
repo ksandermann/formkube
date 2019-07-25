@@ -9,3 +9,7 @@ output "out_platform_dns_zone_name" {
   value       = azurerm_dns_zone.cluster.name
   description = "Name of the dns zone that was created."
 }
+
+output "out_vhd_uri" {
+  value       = azurerm_storage_blob.testsb.url
+}

@@ -136,6 +136,7 @@ module "bastions" {
   out_platform_rg_name = module.essentials.out_platform_rg_name
   out_bastions_subnet_nics_ids = module.vnet.out_bastions_nics_ids
 
+  bastion_vhd_uri = module.essentials.out_vhd_uri
 }
 
 module "masters" {

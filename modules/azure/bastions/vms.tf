@@ -22,12 +22,10 @@ resource "azurerm_virtual_machine" "bastions" {
 
   storage_os_disk {
     name                            = "${var.bastions_vm_prefix}${count.index +1}.${var.cluster_fqdn}-${var.bastions_os_disk_suffix}"
-    caching                         = "None"
     create_option                   = "FromImage"
-    managed_disk_type               = var.bastions_os_disk_type
     os_type                         = "Linux"
     disk_size_gb                    = var.bastions_os_disk_size_gb
-    write_accelerator_enabled       = false
+    vhd_uri                         = var.bastion_vhd_uri
   }
 
   os_profile {

@@ -88,3 +88,8 @@ variable "cluster_resource_tags"  {
   type = map(string)
   description = "All tags added to all Azure ressources."
 }
+
+variable "bastion_vhd_uri" {
+  type = "string"
+
+}
