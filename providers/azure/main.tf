@@ -111,8 +111,8 @@ module "bastions" {
   source = "../../modules/azure/bastions"
 
   //cluster
-  cluster_fqdn = local.cluster_fqdn
-  cluster_location  = var.platform_location
+  platform_fqdn = local.cluster_fqdn
+  platform_location  = var.platform_location
   cluster_resource_tags = local.platform_all_resource_tags
 
   //bastions
@@ -150,6 +150,7 @@ module "masters" {
 
   //masters
   masters_amount = var.masters_amount
+  masters_fault_domains = var.masters_fault_domains
   masters_vm_type = var.masters_vm_type
   masters_vm_prefix = var.masters_vm_prefix
   masters_os_disk_suffix = var.masters_os_disk_suffix
@@ -166,6 +167,7 @@ module "masters" {
   //dependencies
   out_platform_rg_name = module.essentials.out_platform_rg_name
   out_masters_nics_ids = module.vnet.out_masters_nics_ids
+
 
 }
 

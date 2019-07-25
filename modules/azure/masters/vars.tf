@@ -22,6 +22,11 @@ variable "masters_amount" {
   description = "Number of masters to create."
 }
 
+variable "masters_fault_domains" {
+  type = "string"
+  description = "Number of fault domains for the availibility set of the masters. This is depending on the region that you are using. https://github.com/MicrosoftDocs/azure-docs/blob/master/includes/managed-disks-common-fault-domain-region-list.md"
+}
+
 variable "masters_vm_prefix" {
   type    = "string"
   description = "Prefix of the name of the vm resource for the masters. Resource name will be build with pattern (masters_vm_prefix)(index).cluster_name.cluster_domain . Example: master"

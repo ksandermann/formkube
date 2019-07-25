@@ -159,6 +159,13 @@ variable "masters_amount" {
   default = "3"
 }
 
+variable "masters_fault_domains" {
+  type = "string"
+  description = "Number of fault domains for the availibility set of the masters. This is depending on the region that you are using. https://github.com/MicrosoftDocs/azure-docs/blob/master/includes/managed-disks-common-fault-domain-region-list.md"
+  default = "2"
+}
+
+
 variable "masters_vm_type" {
   type = "string"
   description = "Type of the vm for the master. Example: Standard_D4_v3"

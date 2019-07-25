@@ -1,3 +1,16 @@
+resource "azurerm_availability_set" "masters" {
+  name                          = "${var.masters_vm_prefix}s.${var.cluster_fqdn}"
+  location                      = var.platform_resource_tags
+  resource_group_name           = var.out_platform_rg_name
+  managed                       = true
+  platform_fault_domain_count   = var.masters_fault_domains
+  //more than 6 masters doesn't make sense
+  platform_update_domain_count  = (var.masters_fault_domains > 1) ? 6 : 3
+  tags                          = var.platform_resource_tags
+
+}
+
+
 resource "azurerm_virtual_machine" "masters" {
   count                             = var.masters_amount
   name                              = "${var.masters_vm_prefix}${count.index +1}.${var.cluster_fqdn}"
@@ -5,11 +18,10 @@ resource "azurerm_virtual_machine" "masters" {
   resource_group_name               = var.out_platform_rg_name
   network_interface_ids             = [var.out_masters_nics_ids[count.index]]
   vm_size                           = var.masters_vm_type
-  //use modulo 3 as only regions with 3 av. zones are supported
-  zones                             = [(count.index%3)+1]
   tags                              = var.platform_resource_tags
   delete_os_disk_on_termination     = var.masters_os_disk_delete_on_destroy
   delete_data_disks_on_termination  = true
+  availability_set_id               = azurerm_availability_set.masters.id
 
   //LRS for OS disks is sufficient as application data will be placed on seperate disks anyway
   storage_image_reference {
@@ -41,5 +53,12 @@ resource "azurerm_virtual_machine" "masters" {
       key_data                      = file(var.masters_pub_key_controller_path)
       path                          = "/home/${var.masters_admin_username}/.ssh/authorized_keys"
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      "storage_os_disk",
+      "storage_data_disk",
+    ]
   }
 }
