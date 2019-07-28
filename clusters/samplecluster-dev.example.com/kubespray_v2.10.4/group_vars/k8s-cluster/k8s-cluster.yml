@@ -100,7 +100,7 @@ kube_apiserver_insecure_port: 0  # (disabled)
 # Kube-proxy proxyMode configuration.
 # Can be ipvs, iptables
 # migrated iptables from old inventory, not sure of necessary
-kube_proxy_mode: iptables
+kube_proxy_mode: ipvs
 
 # A string slice of values which specify the addresses to use for NodePorts.
 # Values may be valid IP blocks (e.g. 1.2.3.0/24, 1.2.3.4/32).
