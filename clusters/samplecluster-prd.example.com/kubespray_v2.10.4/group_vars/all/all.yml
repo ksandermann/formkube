@@ -61,6 +61,7 @@ kubelet_load_modules: true
 #upstream_dns_servers:
 #  - 1.1.1.1
 #  - 1.0.0.1
+disable_ipv6_dns: false
 
 ##################################################### CLOUD PROVIDER ###################################################
 
@@ -72,6 +73,32 @@ kubelet_load_modules: true
 ## Note: The 'external' cloud provider is not supported.
 ## TODO(riverzhang): https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/#running-cloud-controller-manager
 # cloud_provider:
+
+cloud_provider: azure
+#kubespray/extra_playbooks/roles/kubernetes/node/templates/azure-cloud-config.j2
+#https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/cloud-provider-config.md
+
+azure_location: westeurope
+azure_resource_group: samplecluster-prd.example.com
+
+azure_vnet_name: samplecluster-prd.example.com
+azure_subnet_name: cluster.samplecluster-prd.example.com
+azure_security_group_name: cluster.samplecluster-prd.example.com
+azure_loadbalancer_sku: standard
+
+azure_subscription_id: "" -> set this when calling playbook using -e
+azure_aad_client_id: "" -> set this when calling playbook using -e
+azure_aad_client_secret: "" -> set this when calling playbook using -e
+azure_tenant_id: "" -> set this when calling playbook using -e
+
+
+#not mandatory
+azure_vnet_resource_group: samplecluster-prd.example.com
+azure_route_table_name: cluster.samplecluster-prd.example.com
+azure_exclude_master_from_standard_lb: true
+azure_disable_outbound_snat: true
+azure_use_instance_metadata: false
+loadbalancer_apiserver_localhost: false
 
 ##################################################### PROXY ############################################################
 
