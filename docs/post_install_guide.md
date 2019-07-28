@@ -38,6 +38,13 @@ the guys of [kubespray](https://github.com/kubernetes-sigs/kubespray), who do an
 needed to install Kubernetes using Ansible. You can find an exemplary kubespray inventory configuration in the sample
 cluster configurations of FormKube.
 
+In case you chose to go for kubespray, there are two pitfalls to look out for:
+1. Recommended IP configuration: IPv4 and IPv6 enabled on kernel-level, IPv4- and IPv6-forwarding enabled on kernel-level.
+1. When kubespray comes to the task *Initialize First Master*, it might be possible that the Azure Loadbalancer that was
+created by FormKube does not pick up healthy Kubernets-API-Server Backends in the time given by kubespray. This can be
+worked-around by changing **anything** in the Loadbalancing rule in the Azure Portal (i.e. the port) and then switching
+it back to the correct configuration. This workaround will re-trigger the Azure Loadbalancer to look for healthy backends.
+
 ## Installing OpenShift
 
 When it comes to OpenShift, the recommendation is similar - 
