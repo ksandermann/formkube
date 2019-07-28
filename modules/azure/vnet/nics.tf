@@ -4,7 +4,7 @@ resource "azurerm_network_interface" "bastions" {
   location                        = var.platform_location
   resource_group_name             = var.out_platform_rg_name
   network_security_group_id       = azurerm_network_security_group.bastions.id
-  enable_ip_forwarding            = "false"
+  enable_ip_forwarding            = true
   enable_accelerated_networking   = "false"
   //dns servers can not be set here as azurerm_dns_zone does not return DNS servers as IPs. This is not an issue as we are using a public DNS zone anyway.
   tags                            = var.platform_resource_tags
@@ -27,7 +27,7 @@ resource "azurerm_network_interface" "masters" {
   location                        = var.platform_location
   resource_group_name             = var.out_platform_rg_name
   network_security_group_id       = azurerm_network_security_group.cluster.id
-  enable_ip_forwarding            = "false"
+  enable_ip_forwarding            = true
   enable_accelerated_networking   = "false"
   tags                            = var.platform_resource_tags
 
@@ -48,7 +48,7 @@ resource "azurerm_network_interface" "computenodes" {
   location                        = var.platform_location
   resource_group_name             = var.out_platform_rg_name
   network_security_group_id       = azurerm_network_security_group.cluster.id
-  enable_ip_forwarding            = "false"
+  enable_ip_forwarding            = true
   enable_accelerated_networking   = "false"
   tags                            = var.platform_resource_tags
 
@@ -69,7 +69,7 @@ resource "azurerm_network_interface" "infranodes" {
   location                          = var.platform_location
   resource_group_name               = var.out_platform_rg_name
   network_security_group_id         = azurerm_network_security_group.cluster.id
-  enable_ip_forwarding              = "false"
+  enable_ip_forwarding              = true
   enable_accelerated_networking     = "false"
   tags                              = var.platform_resource_tags
 
