@@ -117,8 +117,8 @@ variable "bastions_os_disk_size_gb" {
 
 variable "bastions_admin_username" {
   type = "string"
-  description = "Name of the admin user on the bastion. Must not be admin or root Example: operator"
-  default = "clusteradmin"
+  description = "Name of the admin user on the bastion. Must not be admin or root Example: bastionadmin"
+  default = "bastionadmin"
 }
 
 variable "bastions_os_disk_type" {
@@ -198,8 +198,8 @@ variable "masters_os_disk_size_gb" {
 
 variable "masters_admin_username" {
   type = "string"
-  description = "Name of the admin user on the master. Must not be admin or root Example: operator"
-  default = "operator"
+  description = "Name of the admin user on the master. Must not be admin or root Example: clusteradmin"
+  default = "clusteradmin"
 }
 
 variable "masters_os_disk_type" {
@@ -272,8 +272,8 @@ variable "computenodes_os_disk_size_gb" {
 
 variable "computenodes_admin_username" {
   type = "string"
-  description = "Name of the admin user on the compute nodes. Must not be admin or root Example: operator"
-  default = "operator"
+  description = "Name of the admin user on the compute nodes. Must not be admin or root Example: clusteradmin"
+  default = "clusteradmin"
 }
 
 variable "computenodes_os_disk_type" {
@@ -346,8 +346,8 @@ variable "infranodes_os_disk_size_gb" {
 
 variable "infranodes_admin_username" {
   type = "string"
-  description = "Name of the admin user on the infra nodes. Must not be admin or root Example: operator"
-  default = "operator"
+  description = "Name of the admin user on the infra nodes. Must not be admin or root Example: clusteradmin"
+  default = "clusteradmin"
 }
 
 variable "infranodes_os_disk_type" {

@@ -57,3 +57,6 @@ It is basically the result of me teaching myself Terraform and Azure. :)
 
 # Authors
 1. [ksandermann](https://github.com/ksandermann)
+
+#TODO
+https://docs.microsoft.com/en-us/azure/aks/use-multiple-node-pools#before-you-begin
