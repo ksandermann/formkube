@@ -15,7 +15,7 @@ docker run -it --rm ksandermann/cloud-toolbox:latest bash
 
 ## AKS Provider-Specific Tasks
 
-### Granting permissions for Azure Service Principle
+### Granting permissions for Formkube Service Principle
 
 The Service Principle needs to have the following permissions to permissions:
 
@@ -60,11 +60,11 @@ Or via Azure CLI: (set the environment variable `FORMKUBE_SUBSCRIPTION_ID`)
 
 ```sh
 az ad app permission add \
-    --id $FORMKUBE_SUBSCRIPTION_ID \
+    --id $FORMKUBE_CLIENT_ID \
     --api 00000002-0000-0000-c000-000000000000 \
     --api-permissions 311a71cc-e848-46a1-bdf8-97ff7156d8e6=Scope 1cda74f2-2616-4834-b122-5cb1b07f8a59=Role
-az ad app permission grant --id $FORMKUBE_SUBSCRIPTION_ID --api 00000002-0000-0000-c000-000000000000
-az ad app permission admin-consent --id  $FORMKUBE_SUBSCRIPTION_ID
+az ad app permission grant --id $FORMKUBE_CLIENT_ID --api 00000002-0000-0000-c000-000000000000
+az ad app permission admin-consent --id  $FORMKUBE_CLIENT_ID
 ```
 
 ## Manual Credential Configuration
