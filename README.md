@@ -46,7 +46,7 @@ It is basically the result of me teaching myself Terraform and Azure. :)
 
 1. Run the following in the repo's root dir:
     ```bash
-    export CLUSTER=mycluster.mydomain.com #has to be the name of the folder with your configuration inside the clusters dir
+    export FORMKUBE_CLUSTER=mycluster.mydomain.com #has to be the name of the folder with your configuration inside the clusters dir
     export FORMKUBE_SUBSCRIPTION_ID=abcde-abcde-abcde-abcde
     export FORMKUBE_CLIENT_ID=abcde-abcde-abcde-abcde
     export FORMKUBE_CLIENT_SECRET=abcde-abcde-abcde-abcde

@@ -1,27 +1,29 @@
 resource "azurerm_kubernetes_cluster" "test" {
-  name                = var.platform_fqdn
+  name                = var.cluster_name
   location            = var.platform_location
   resource_group_name = var.out_platform_rg_name
   dns_prefix          = "api-${var.cluster_name}"
 
   agent_pool_profile {
-    name            = "${var.computenodes_vm_prefix}s.${var.cluster_domain}"
+    name            = var.computenodes_vm_prefix
     count           = var.computenodes_amount
     vm_size         = var.computenodes_vm_type
     os_type         = "Linux"
     os_disk_size_gb = var.computenodes_os_disk_size_gb
     type            = "AvailabilitySet"
     max_pods        = 100
-}
+    vnet_subnet_id  = var.out_cluster_subnet_id
+  }
 
   agent_pool_profile {
-    name            = "${var.infranodes_vm_prefix}s.${var.cluster_domain}"
+    name            = var.infranodes_vm_prefix
     count           = var.infranodes_amount
     vm_size         = var.infranodes_vm_type
     os_type         = "Linux"
     os_disk_size_gb = var.infranodes_os_disk_size_gb
     type            = "AvailabilitySet"
     max_pods        = 100
+    vnet_subnet_id  = var.out_cluster_subnet_id
   }
 
   linux_profile {
@@ -31,7 +33,6 @@ resource "azurerm_kubernetes_cluster" "test" {
       key_data = file(var.computenodes_pub_key_controller_path)
     }
   }
-
 
   service_principal {
     client_id     = var.cluster_k8s_serviceaccount_client_id
@@ -60,17 +61,25 @@ resource "azurerm_kubernetes_cluster" "test" {
     }
   }
 
+  //NOTE: When network_plugin is set to azure - the vnet_subnet_id field in the agent_pool_profile block must be set.
+
   network_profile {
     network_plugin = "azure"
     network_policy = "azure"
-    dns_service_ip
-    docker_bridge_cidr
-pod_cidr
-service_cidr
-load_balancer_sku = "standard"
+    dns_service_ip = "192.168.0.10"
+    docker_bridge_cidr = "172.17.0.1/16"
+    pod_cidr        = "10.240.0.0/16"
+    service_cidr  = "192.168.0.0/16"
+    load_balancer_sku = "basic"
 
 }
-
 
   tags            = var.platform_resource_tags
+
+  lifecycle {
+    ignore_changes = [
+      "network_profile"
+    ]
+  }
 }
+

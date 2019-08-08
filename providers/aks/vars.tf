@@ -1,23 +1,11 @@
-/////////////////////////////////////////////////////CLUSTER////////////////////////////////////////////////////////////
-
-variable "out_platform_rg_name" {
+variable "platform_rg_name" {
   type = "string"
-  description = "Name of the resource group to create for the cluster. It is recommended to not use an existing rg. Example: k8s-dev.example.com"
+  description = "Name of the resource group to create for the platform. It is recommended to not use an existing rg. Example: k8s-dev.example.com"
 }
 
 variable "platform_location" {
   type = "string"
-  description = "Region of the resource group to create for the cluster. It is recommended to not use an existing rg. Example: westeurope"
-}
-
-variable "platform_fqdn" {
-  type = "string"
-  description = "FQDN of the cluster. Example: k8s-dev.example.com"
-}
-
-variable "platform_resource_tags"  {
-  type = map(string)
-  description = "All tags added to all Azure ressources."
+  description = "Region of the resource group to create for the platform. It is recommended to not use an existing rg. Example: westeurope"
 }
 
 variable "cluster_name" {
@@ -30,21 +18,23 @@ variable "cluster_domain" {
   description = "domain of the cluster. No leading '.' needed. Example: example.com"
 }
 
-variable "cluster_k8s_serviceaccount_client_id" {
+variable "platform_staging_environment"  {
   type = "string"
-  description = "ClientID of the Service Principal Used for the Kubernetes Cloud Provider"
+  description = "Stage of the platform."
 }
 
-variable "cluster_k8s_serviceaccount_client_secret" {
-  type = "string"
-  description = "ClientSecret of the Service Principal Used for the Kubernetes Cloud Provider"
-}
 
-variable "out_cluster_subnet_id" {
-  type = "string"
-  description = "ID of the subnet that was created."
-}
 
+
+
+
+//////optional
+
+variable "platform_resource_tags_additional"  {
+  type = map(string)
+  description = "Additional tags added to all Azure ressources. Default values are ClusterName, ClusterDomain and ClusterFQDN."
+  default = {}
+}
 
 
 /////////////////////////////////////////////////////COMPUTENODES///////////////////////////////////////////////////////
@@ -103,13 +93,3 @@ variable "infranodes_os_disk_size_gb" {
 
 
 
-
-
-
-
-
-
-variable "out_log_analytics_workspace_id" {
-  type = "string"
-  description = "ID of the Log Analytics Workspace that was created."
-}

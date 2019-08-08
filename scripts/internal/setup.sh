@@ -12,8 +12,9 @@ fi
 #https://github.com/ksandermann/cloud-toolbox
 export FORMKUBE_BOOTSTRAP_ENVIRONMENT="ksandermann/cloud-toolbox:2019-07-18_01"
 
+#todo make configurable
 #only azure supported for now
-export FORMKUBE_PROVIDER="azure"
+export FORMKUBE_PROVIDER="aks"
 
 echo "Downloading latest version of FormKube runtime -  '$FORMKUBE_BOOTSTRAP_ENVIRONMENT'..."
 docker pull $FORMKUBE_BOOTSTRAP_ENVIRONMENT  &>/dev/null
