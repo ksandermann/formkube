@@ -16,6 +16,8 @@ if [ "$FORMKUBE_DEVELOPMENT_MODE" == "true" ]; then
     terraform plan \
     -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
     -out clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
+    -var aks_cluster_k8s_serviceaccount_client_id=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID \
+    -var aks_cluster_k8s_serviceaccount_client_secret=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET \
     -var masters_os_disk_delete_on_destroy=true \
     -var masters_backup_enabled=false \
     -var computenodes_backup_enabled=false \

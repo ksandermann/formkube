@@ -22,6 +22,16 @@ Loadbalancer was created, you will need to change the A-Record for the Loadbalan
 to the IP address of the loadbalancer that was created by Kubernetes. All of the other records are CNAMEs based onto 
 that A-Record and do not need to be changed.
 
+### Accessing your cluster
+
+After deploying your AKS cluster with FormKube, you can access the cluster the traditional way described
+[here](https://docs.microsoft.com/bs-latn-ba/azure/aks/control-kubeconfig-access#get-and-verify-the-configuration-information)
+with running:
+
+```bash
+az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --admin
+```
+
 ## Azure Provider-Specific Tasks
 
 ### Placing Private ssh keys on the Bastions
