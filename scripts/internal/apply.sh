@@ -25,6 +25,8 @@ if [ "$FORMKUBE_DEVELOPMENT_MODE" == "true" ]; then
     providers/$FORMKUBE_PROVIDER
 else
     terraform plan \
+    -var aks_cluster_k8s_serviceaccount_client_id=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID \
+    -var aks_cluster_k8s_serviceaccount_client_secret=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET \
     -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
     -out clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
     -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
@@ -32,5 +34,3 @@ else
 fi
 
 terraform apply  -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
-
-

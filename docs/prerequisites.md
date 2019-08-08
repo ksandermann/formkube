@@ -20,9 +20,26 @@ To configure FormKube to work with the cluster, you have to export the environme
     export FORMKUBE_CLUSTER=k8s-dev.example.com
     ```
 
-* As FormKube uses Azure availability zones, you need to take a look
-[here](https://docs.microsoft.com/bs-latn-ba/azure/availability-zones/az-overview#services-support-by-region)
-which regions are supported.
+* FormKube currently supports bare bootstrapping of the infrastructure needed to deploy Kubernetes on your own, as well 
+as deploying Kubernetes using Azure Kubernetes Service. To configure the provider you want to use (azure for infrastructure
+only, aks for a full Kubernetes cluster), you need to export the following environment variable:
+    ```bash
+    # either 
+    export FORMKUBE_PROVIDER=aks
+    # or 
+    export FORMKUBE_PROVIDER=azure
+    ```
+    The cluster configuration varies depending on the provider you are using. For example, when using the AKS provider,
+    infranodes are not supported. Instead, there are a couple of AKS-specific variables that need to be defined. These
+    variables are prefixed with *aks_*. 
+    
+* Additionally, when using the aks provider, you will need to specify additional environment variables for the service
+principal that the Kubernetes Azure Cloud Provider will use. The following environment variables need to be exported:
+    ```bash
+    export FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID=abcde-abcde-abcde-abcde
+    export FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET=abcde-abcde-abcde-abcde
+    ```
+
 
 * At this time, FormKube cannot generate ssh keys on its own so you have to provide pre-generated ssh keys who's public
 keys will be placed on your vms on Azure. It is recommended to generate ssh keys as described

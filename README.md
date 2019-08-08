@@ -44,8 +44,9 @@ It is basically the result of me teaching myself Terraform and Azure. :)
 
 1. Adjust sample inventory.
 
-1. Run the following in the repo's root dir:
+1. For the Azure provider, un the following in the repo's root dir:
     ```bash
+    export FORMKUBE_PROVIDER=azure
     export FORMKUBE_CLUSTER=mycluster.mydomain.com #has to be the name of the folder with your configuration inside the clusters dir
     export FORMKUBE_SUBSCRIPTION_ID=abcde-abcde-abcde-abcde
     export FORMKUBE_CLIENT_ID=abcde-abcde-abcde-abcde
@@ -53,6 +54,20 @@ It is basically the result of me teaching myself Terraform and Azure. :)
     export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcde
     bash ./scripts/apply.sh
     ```
+
+1. For the AKS provider, un the following in the repo's root dir:
+    ```bash
+    export FORMKUBE_PROVIDER=aks
+    export FORMKUBE_CLUSTER=mycluster.mydomain.com #has to be the name of the folder with your configuration inside the clusters dir
+    export FORMKUBE_SUBSCRIPTION_ID=abcde-abcde-abcde-abcde
+    export FORMKUBE_CLIENT_ID=abcde-abcde-abcde-abcde
+    export FORMKUBE_CLIENT_SECRET=abcde-abcde-abcde-abcde
+    export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcde
+    export FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID=abcde-abcde-abcde-abcde
+    export FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET=abcde-abcde-abcde-abcde
+    bash ./scripts/apply.sh
+    ```
+
 
 
 # Authors

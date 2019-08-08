@@ -12,7 +12,19 @@ You can find the nameservers that correspond to the Azure domain zone that was p
 zone on the Azure Portal.
 For more information about DNS, take a look at the [DNS Architecture and Configuration](dns.md).
 
-## Placing Private ssh keys on the Bastions
+## AKS Provider-Specific Tasks
+
+### Configuring Loadbalancer CNAME
+
+When deploying the cluster using the AKS provider, you will need to deploy the loadbalancer on you own using the Kubernetes
+Service Type *Loadbalancer*. Usually, you will only use this Service Type once for your Ingresscontroller. After the 
+Loadbalancer was created, you will need to change the A-Record for the Loadbalancer inside the created DNS Zone manually
+to the IP address of the loadbalancer that was created by Kubernetes. All of the other records are CNAMEs based onto 
+that A-Record and do not need to be changed.
+
+## Azure Provider-Specific Tasks
+
+### Placing Private ssh keys on the Bastions
 
 As already mentioned in the [*Bootstrapping Prerequisites*](prerequisites.md), FormKube does not handle your ssh keys
 for you. Therefore, after initial bootstrapping, it is required that you place the private ssh keys that correspond to
@@ -21,12 +33,12 @@ the public ssh keys, that you passed using the variables *bastions_pub_key_contr
 the bastion host. You can do this manually, via sth. like Ansible or simple use a shellscript calling 
 [scp](https://linux.die.net/man/1/scp).
 
-## Additional Post-Installation Tasks
+### Additional Post-Installation Tasks
 
 It may occur that in current releases, additional manual post-installation tasks are required.
 You can find them in [Known Issues](./known_issues.mdn).
 
-## Installing Kubernetes
+### Installing Kubernetes
 
 There are many ways to install Kubernetes today -  
 [naked kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/),
@@ -45,7 +57,7 @@ created by FormKube does not pick up healthy Kubernets-API-Server Backends in th
 worked-around by changing **anything** in the Loadbalancing rule in the Azure Portal (i.e. the port) and then switching
 it back to the correct configuration. This workaround will re-trigger the Azure Loadbalancer to look for healthy backends.
 
-## Installing OpenShift
+### Installing OpenShift
 
 When it comes to OpenShift, the recommendation is similar - 
 [openshift-ansible](https://github.com/openshift/openshift-ansible) implements ansible roles for the whole installation
