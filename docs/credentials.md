@@ -44,17 +44,17 @@ The Service Principle needs to have the following permissions to permissions:
 They can be set via Web UI:
 
 1. Navigate to `Azure Active Directory` -> `App registrations`
-2. Select your Service Principal
-3. Navigate to `API Permissions`
-4. Add a permission
+1. Select your Service Principal
+1. Navigate to `API Permissions`
+1. Add a permission
    1. Select unter the heading `Supported legacy APIs` `Azure Active Directory Graph`
-   2. Select `Application permissions`
-   3. Grant the permission `Application.ReadWrite.All`
-5. Add a permission
+   1. Select `Application permissions`
+   1. Grant the permission `Application.ReadWrite.All`
+1. Add a permission
    1. Select unter the heading `Supported legacy APIs` `Azure Active Directory Graph`
-   2. Select `Delegated permissions`
-   3. Grant the permission `User.Read`
-6. Click on the button `Grant admin consent for directory`
+   1. Select `Delegated permissions`
+   1. Grant the permission `User.Read`
+1. Click on the button `Grant admin consent for directory`
 
 Or via Azure CLI: (set the environment variable `FORMKUBE_CLIENT_ID`)
 
