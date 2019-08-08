@@ -13,7 +13,7 @@ Docker container containing Azure CLI:
 docker run -it --rm ksandermann/cloud-toolbox:latest bash
 ```
 
-## Azure Provider-Specific Tasks
+## AKS Provider-Specific Tasks
 
 ### Granting permissions for Azure Service Principle
 
