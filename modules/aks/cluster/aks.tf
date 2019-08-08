@@ -4,7 +4,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name             = var.out_platform_rg_name
   dns_prefix                      = "api-${var.cluster_name}"
   kubernetes_version              = var.aks_cluster_k8s_version
-  node_resource_group             = "${var.aks_nodes_vm_prefix}s.${var.cluster_domain}"
+  node_resource_group             = "${var.platform_fqdn}_${var.aks_nodes_vm_prefix}s"
   tags                            = var.platform_resource_tags
 
   agent_pool_profile {
@@ -35,15 +35,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
     enabled                       = true
 
 
-//    todo
-//    azure_active_directory {
-//      # NOTE: in a Production environment these should be different values
-//      # but for the purposes of this example, this should be sufficient
-//      client_app_id = "${var.kubernetes_client_id}"
-//
-//      server_app_id     = "${var.kubernetes_client_id}"
-//      server_app_secret = "${var.kubernetes_client_secret}"
-//    }
+    //idea: service principal used for terraform not enough permissions to see the service principal in AD ?
+    //idea: set pw to something easier
+    azure_active_directory {
+      client_app_id               = var.out_aks_cluster_k8s_ad_client_app_id
+      server_app_id               = var.out_aks_cluster_k8s_ad_server_app_id
+      server_app_secret           = var.out_aks_cluster_k8s_ad_server_app_secret
+    }
   }
 
   addon_profile {

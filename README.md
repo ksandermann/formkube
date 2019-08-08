@@ -65,6 +65,7 @@ It is basically the result of me teaching myself Terraform and Azure. :)
     export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcde
     export FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID=abcde-abcde-abcde-abcde
     export FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET=abcde-abcde-abcde-abcde
+    export FORMKUBE_AAD_SERVER_APPLICATION_SECRET=CanBeChosenFreelyButNeverChanged
     bash ./scripts/apply.sh
     ```
 
@@ -72,6 +73,3 @@ It is basically the result of me teaching myself Terraform and Azure. :)
 
 # Authors
 1. [ksandermann](https://github.com/ksandermann)
-
-#TODO
-https://docs.microsoft.com/en-us/azure/aks/use-multiple-node-pools#before-you-begin

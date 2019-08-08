@@ -39,6 +39,13 @@ principal that the Kubernetes Azure Cloud Provider will use. The following envir
     export FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID=abcde-abcde-abcde-abcde
     export FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET=abcde-abcde-abcde-abcde
     ```
+* Also, when using the aks provider, you have to choose a password for the AAD Server Application. The password can be 
+chosen freely, but must never be changed. 
+    ```bash
+    export FORMKUBE_AAD_SERVER_APPLICATION_SECRET=CanBeChosenFreelyButNeverChanged
+    ```
+
+
 
 
 * At this time, FormKube cannot generate ssh keys on its own so you have to provide pre-generated ssh keys who's public

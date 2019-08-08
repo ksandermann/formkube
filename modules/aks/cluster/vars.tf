@@ -40,6 +40,21 @@ variable "aks_cluster_k8s_serviceaccount_client_secret" {
   description = "ClientSecret of the Service Principal Used for the Kubernetes Cloud Provider"
 }
 
+variable "out_aks_cluster_k8s_ad_client_app_id" {
+  type = "string"
+  description = "AppID of the Azure AD Client Application used to integrate Kubernetes with Azure AD."
+}
+
+variable "out_aks_cluster_k8s_ad_server_app_id" {
+  type = "string"
+  description = "AppID of the Azure AD Server Application used to integrate Kubernetes with Azure AD."
+}
+
+variable "out_aks_cluster_k8s_ad_server_app_secret" {
+  type = "string"
+  description = "AppSecret of the Azure AD Server Application used to integrate Kubernetes with Azure AD."
+}
+
 variable "out_cluster_subnet_id" {
   type = "string"
   description = "ID of the subnet that was created."
@@ -49,7 +64,6 @@ variable "aks_cluster_k8s_version" {
   type = "string"
   description = "Kubernetes Version of the AKS cluster."
 }
-
 
 /////////////////////////////////////////////////////AKS-NODES///////////////////////////////////////////////////////////
 
