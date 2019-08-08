@@ -1,5 +1,5 @@
 terraform {
-  required_version = "0.12.4"
+  required_version = "0.12.5"
 }
 
 provider "azurerm" {
@@ -17,9 +17,6 @@ locals {
   }
 
   platform_all_resource_tags = merge(local.platform_default_resource_tags,var.platform_resource_tags_additional)
-
-  cluster_k8s_serviceaccount_client_id = "79435f73-3a29-4a51-966a-8ec3d579cab0"
-  cluster_k8s_serviceaccount_client_secret = "a20be318-dd1d-451e-97df-90d622454f98"
 }
 
 
@@ -29,6 +26,22 @@ module "essentials" {
   platform_location = var.platform_location
   platform_resource_tags = local.platform_all_resource_tags
   platform_rg_name = var.platform_rg_name
+}
+
+module "dns" {
+  source = "../../modules/aks/dns"
+
+  cluster_fqdn = local.cluster_fqdn
+  loadbalancer_dns_additional_cnames = var.loadbalancer_dns_additional_cnames
+  loadbalancer_dns_default_cnames = var.loadbalancer_dns_default_cnames
+  loadbalancer_dns_name = var.loadbalancer_dns_name
+  loadbalancer_dns_ops_additional_cnames = var.loadbalancer_dns_ops_additional_cnames
+  loadbalancer_dns_ops_default_cnames = var.loadbalancer_dns_ops_default_cnames
+  loadbalancer_dns_ttl = var.loadbalancer_dns_ttl
+  out_platform_dns_zone_name = module.essentials.out_platform_dns_zone_name
+  out_platform_rg_name = module.essentials.out_platform_rg_name
+  platform_location = var.platform_location
+  platform_resource_tags = local.platform_all_resource_tags
 }
 
 
@@ -42,24 +55,25 @@ module "vnet" {
 
 module "cluster" {
   source = "../../modules/aks/cluster"
+
+
+  //infranodes are not supported when using AKS provider
   cluster_domain = var.cluster_domain
-  cluster_k8s_serviceaccount_client_id = local.cluster_k8s_serviceaccount_client_id
-  cluster_k8s_serviceaccount_client_secret = local.cluster_k8s_serviceaccount_client_secret
+  cluster_k8s_serviceaccount_client_id = var.aks_cluster_k8s_serviceaccount_client_id
+  aks_cluster_k8s_serviceaccount_client_secret = var.aks_cluster_k8s_serviceaccount_client_secret
   cluster_name = var.cluster_name
-  computenodes_admin_username = var.computenodes_admin_username
-  computenodes_amount = var.computenodes_amount
-  computenodes_os_disk_size_gb = var.computenodes_os_disk_size_gb
-  computenodes_pub_key_controller_path = var.computenodes_pub_key_controller_path
-  computenodes_vm_prefix = var.computenodes_vm_prefix
-  computenodes_vm_type = var.computenodes_vm_type
-  infranodes_amount = var.infranodes_amount
-  infranodes_os_disk_size_gb = var.infranodes_os_disk_size_gb
-  infranodes_vm_prefix = var.infranodes_vm_prefix
-  infranodes_vm_type = var.infranodes_vm_type
   out_cluster_subnet_id = module.vnet.out_cluster_subnet_id
   out_log_analytics_workspace_id = module.essentials.out_log_analytics_workspace_id
   out_platform_rg_name = module.essentials.out_platform_rg_name
   platform_fqdn = local.cluster_fqdn
   platform_location = var.platform_location
   platform_resource_tags = local.platform_all_resource_tags
+  aks_cluster_k8s_version = var.aks_cluster_k8s_version
+  aks_nodes_admin_username = var.aks_nodes_admin_username
+  aks_nodes_amount = var.aks_nodes_amount
+  aks_nodes_max_pods = var.aks_nodes_max_pods
+  aks_nodes_os_disk_size_gb = var.aks_nodes_os_disk_size_gb
+  aks_nodes_pub_key_controller_path = var.aks_nodes_pub_key_controller_path
+  aks_nodes_vm_prefix = var.aks_nodes_vm_prefix
+  aks_nodes_vm_type = var.aks_nodes_vm_type
 }

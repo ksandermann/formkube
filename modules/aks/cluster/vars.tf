@@ -35,7 +35,7 @@ variable "cluster_k8s_serviceaccount_client_id" {
   description = "ClientID of the Service Principal Used for the Kubernetes Cloud Provider"
 }
 
-variable "cluster_k8s_serviceaccount_client_secret" {
+variable "aks_cluster_k8s_serviceaccount_client_secret" {
   type = "string"
   description = "ClientSecret of the Service Principal Used for the Kubernetes Cloud Provider"
 }
@@ -45,68 +45,48 @@ variable "out_cluster_subnet_id" {
   description = "ID of the subnet that was created."
 }
 
+variable "aks_cluster_k8s_version" {
+  type = "string"
+  description = "Kubernetes Version of the AKS cluster."
+}
 
 
-/////////////////////////////////////////////////////COMPUTENODES///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////AKS-NODES///////////////////////////////////////////////////////////
 
-variable "computenodes_amount" {
+variable "aks_nodes_amount" {
   type    = "string"
-  description = "Number of compute nodes to create."
+  description = "Number of compute aks_nodes to create."
 }
 
-variable "computenodes_vm_type" {
+variable "aks_nodes_vm_type" {
   type = "string"
-  description = "Type of the vm for the compute nodes. Example: Standard_D8_v3"
+  description = "Type of the vm for the compute aks_nodes. Example: Standard_D8_v3"
 }
 
-variable "computenodes_vm_prefix" {
+variable "aks_nodes_vm_prefix" {
   type    = "string"
-  description = "Prefix of the name of the vm resource for the compute nodes. Resource name will be build with pattern (computenodes_vm_prefix)(index).cluster_name.cluster_domain . Example: computenode"
+  description = "Prefix of the name of the vm resource for the compute aks_nodes. Resource name will be build with pattern (aks_nodes_vm_prefix)(index).cluster_name.cluster_domain . Example: computenode"
 }
 
-variable "computenodes_os_disk_size_gb" {
+variable "aks_nodes_os_disk_size_gb" {
   type = "string"
-  description = "Size of the OS disks for the compute nodes. Example: 200"
+  description = "Size of the OS disks for the compute aks_nodes. Example: 200"
 }
 
-variable "computenodes_pub_key_controller_path" {
+variable "aks_nodes_pub_key_controller_path" {
   type = "string"
-  description = "Path on the controller node running terraform to the public ssh key to place into authorized_keys for the admin user on the compute nodes."
+  description = "Path on the controller node running terraform to the public ssh key to place into authorized_keys for the admin user on the compute aks_nodes."
 }
 
-variable "computenodes_admin_username" {
+variable "aks_nodes_admin_username" {
   type = "string"
-  description = "Name of the admin user on the compute nodes. Must not be admin or root Example: operator"
+  description = "Name of the admin user on the compute aks_nodes. Must not be admin or root Example: operator"
 }
 
-/////////////////////////////////////////////////////INFRANODES/////////////////////////////////////////////////////////
-
-variable "infranodes_amount" {
-  type    = "string"
-  description = "Number of infra nodes to create."
-}
-
-variable "infranodes_vm_type" {
+variable "aks_nodes_max_pods" {
   type = "string"
-  description = "Type of the vm for the infra nodes. Example: Standard_D8_v3"
+  description = "Maximum number of pods that can run on a single node. Example: 100"
 }
-
-variable "infranodes_vm_prefix" {
-  type    = "string"
-  description = "Prefix of the name of the vm resource for the infra nodes. Resource name will be build with pattern (infranodes_vm_prefix)(index).cluster_name.cluster_domain . Example: infranode"
-}
-
-variable "infranodes_os_disk_size_gb" {
-  type = "string"
-  description = "Size of the OS disks for the infra nodes. Example: 200"
-}
-
-
-
-
-
-
-
 
 
 variable "out_log_analytics_workspace_id" {

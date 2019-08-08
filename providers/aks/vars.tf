@@ -23,10 +23,25 @@ variable "platform_staging_environment"  {
   description = "Stage of the platform."
 }
 
+variable "aks_nodes_pub_key_controller_path" {
+  type = "string"
+  description = "Path on the controller node running terraform to the public ssh key to place into authorized_keys for the admin user on the compute aks_nodes."
+}
 
+variable "aks_cluster_k8s_serviceaccount_client_id" {
+  type = "string"
+  description = "ClientID of the Service Principal Used for the Kubernetes Cloud Provider"
+}
 
+variable "aks_cluster_k8s_serviceaccount_client_secret" {
+  type = "string"
+  description = "ClientSecret of the Service Principal Used for the Kubernetes Cloud Provider"
+}
 
-
+variable "aks_cluster_k8s_version" {
+  type = "string"
+  description = "Kubernetes Version of the AKS cluster."
+}
 
 //////optional
 
@@ -37,59 +52,79 @@ variable "platform_resource_tags_additional"  {
 }
 
 
-/////////////////////////////////////////////////////COMPUTENODES///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////LOADBALANCER///////////////////////////////////////////////////////
 
-variable "computenodes_amount" {
+variable "loadbalancer_dns_name" {
+  type = "string"
+  description = "Name of the loadbalancer. This will be used for DNS entries and ressource names. Example: alb"
+  default = "alb"
+}
+
+variable "loadbalancer_dns_ttl" {
+  type = "string"
+  description = "TTL (in seconds) for DNS records for the loadbalancer."
+  default = "300"
+}
+
+variable "loadbalancer_dns_default_cnames" {
+  type = list(string)
+  description = "Default CNAME records for the loadbalancer. Example: ['cluster', 'logs', 'elastic', 'kibana', 'hawkular-metrics', 'registry', 'dashboard']"
+  default = ["api","cluster", "logs", "elastic", "kibana", "hawkular-metrics", "registry", "dashboard"]
+}
+
+variable "loadbalancer_dns_additional_cnames" {
+  type = list(string)
+  description = "Additional CNAME records to create for the loadbalancer. Default CNAMEs defined in loadbalancer_default_cnames must NOT be included here. only domain prefix is needed, no FQDN Example: ['grafana', 'prometheus', 'console']"
+  default = []
+}
+
+variable "loadbalancer_dns_ops_default_cnames" {
+  type = list(string)
+  description = "Default CNAME records for .ops.loadbalancer_name.cluster_name.cluster_domain To use with the OpenShift operator paradigm (see: https://docs.okd.io/3.11/install_config/prometheus_cluster_monitoring.html//configuring-openshift-cluster-monitoring). Example: ['kibana', 'elastic', 'grafana', 'prometheus']"
+  default = ["kibana", "elastic", "grafana", "prometheus"]
+}
+
+variable "loadbalancer_dns_ops_additional_cnames" {
+  type = list(string)
+  description = "Additional CNAME records to create for the loadbalancer. Default CNAMEs defined in loadbalancer_ops_default_cnames must NOT be included here. only domain prefix is needed, no FQDN Example: ['sentinel']"
+  default = []
+}
+
+/////////////////////////////////////////////////////AKS-NODES//////////////////////////////////////////////////////////
+
+
+variable "aks_nodes_amount" {
   type    = "string"
-  description = "Number of compute nodes to create."
+  description = "Number of compute aks_nodes to create."
+  default = "3"
 }
 
-variable "computenodes_vm_type" {
+variable "aks_nodes_vm_type" {
   type = "string"
-  description = "Type of the vm for the compute nodes. Example: Standard_D8_v3"
+  description = "Type of the vm for the compute aks_nodes. Example: Standard_D8_v3"
+  default = "Standard_D8_v3"
 }
 
-variable "computenodes_vm_prefix" {
+variable "aks_nodes_vm_prefix" {
   type    = "string"
-  description = "Prefix of the name of the vm resource for the compute nodes. Resource name will be build with pattern (computenodes_vm_prefix)(index).cluster_name.cluster_domain . Example: computenode"
+  description = "Prefix of the name of the vm resource for the aks nodes. Resource name will be build with pattern (aks_nodes_vm_prefix)(index).cluster_name.cluster_domain . Example: linuxnode"
+  default = "node"
 }
 
-variable "computenodes_os_disk_size_gb" {
+variable "aks_nodes_os_disk_size_gb" {
   type = "string"
-  description = "Size of the OS disks for the compute nodes. Example: 200"
+  description = "Size of the OS disks for the compute aks_nodes. Example: 200"
+  default = "200"
 }
 
-variable "computenodes_pub_key_controller_path" {
+variable "aks_nodes_admin_username" {
   type = "string"
-  description = "Path on the controller node running terraform to the public ssh key to place into authorized_keys for the admin user on the compute nodes."
+  description = "Name of the admin user on the compute aks_nodes. Must not be admin or root Example: clusteradmin"
+  default = "clusteradmin"
 }
 
-variable "computenodes_admin_username" {
+variable "aks_nodes_max_pods" {
   type = "string"
-  description = "Name of the admin user on the compute nodes. Must not be admin or root Example: operator"
+  description = "Maximum number of pods that can run on a single node. Example: 100"
+  default =  "100"
 }
-
-/////////////////////////////////////////////////////INFRANODES/////////////////////////////////////////////////////////
-
-variable "infranodes_amount" {
-  type    = "string"
-  description = "Number of infra nodes to create."
-}
-
-variable "infranodes_vm_type" {
-  type = "string"
-  description = "Type of the vm for the infra nodes. Example: Standard_D8_v3"
-}
-
-variable "infranodes_vm_prefix" {
-  type    = "string"
-  description = "Prefix of the name of the vm resource for the infra nodes. Resource name will be build with pattern (infranodes_vm_prefix)(index).cluster_name.cluster_domain . Example: infranode"
-}
-
-variable "infranodes_os_disk_size_gb" {
-  type = "string"
-  description = "Size of the OS disks for the infra nodes. Example: 200"
-}
-
-
-

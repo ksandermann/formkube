@@ -10,7 +10,7 @@ fi
 
 
 #https://github.com/ksandermann/cloud-toolbox
-export FORMKUBE_BOOTSTRAP_ENVIRONMENT="ksandermann/cloud-toolbox:2019-07-18_01"
+export FORMKUBE_BOOTSTRAP_ENVIRONMENT="ksandermann/cloud-toolbox:2019-07-31_01"
 
 #todo make configurable
 #only azure supported for now
