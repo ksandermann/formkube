@@ -56,7 +56,7 @@ They can be set via Web UI:
    3. Grant the permission `User.Read`
 6. Click on the button `Grant admin consent for directory`
 
-Or via Azure CLI: (set the environment variable `FORMKUBE_SUBSCRIPTION_ID`)
+Or via Azure CLI: (set the environment variable `FORMKUBE_CLIENT_ID`)
 
 ```sh
 az ad app permission add \
