@@ -59,7 +59,7 @@ module "cluster" {
 
   //infranodes are not supported when using AKS provider
   cluster_domain = var.cluster_domain
-  cluster_k8s_serviceaccount_client_id = var.aks_cluster_k8s_serviceaccount_client_id
+  aks_cluster_k8s_serviceaccount_client_id = var.aks_cluster_k8s_serviceaccount_client_id
   aks_cluster_k8s_serviceaccount_client_secret = var.aks_cluster_k8s_serviceaccount_client_secret
   cluster_name = var.cluster_name
   out_cluster_subnet_id = module.vnet.out_cluster_subnet_id

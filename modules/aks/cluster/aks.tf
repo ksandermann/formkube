@@ -1,4 +1,4 @@
-resource "azurerm_kubernetes_cluster" "test" {
+resource "azurerm_kubernetes_cluster" "aks" {
   name                            = var.cluster_name
   location                        = var.platform_location
   resource_group_name             = var.out_platform_rg_name
@@ -27,7 +27,7 @@ resource "azurerm_kubernetes_cluster" "test" {
   }
 
   service_principal {
-    client_id                     = var.cluster_k8s_serviceaccount_client_id
+    client_id                     = var.aks_cluster_k8s_serviceaccount_client_id
     client_secret                 = var.aks_cluster_k8s_serviceaccount_client_secret
   }
 

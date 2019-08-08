@@ -30,7 +30,7 @@ variable "cluster_domain" {
   description = "domain of the cluster. No leading '.' needed. Example: example.com"
 }
 
-variable "cluster_k8s_serviceaccount_client_id" {
+variable "aks_cluster_k8s_serviceaccount_client_id" {
   type = "string"
   description = "ClientID of the Service Principal Used for the Kubernetes Cloud Provider"
 }
