@@ -17,6 +17,8 @@ if [ "$FORMKUBE_DEVELOPMENT_MODE" == "true" ]; then
     -var aks_cluster_k8s_serviceaccount_client_id=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID \
     -var aks_cluster_k8s_serviceaccount_client_secret=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET \
     -var aks_cluster_k8s_ad_server_app_secret=$FORMKUBE_AAD_SERVER_APPLICATION_SECRET \
+    -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
+    -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
     -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
     -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
     -auto-approve \
@@ -35,6 +37,8 @@ else
     -var aks_cluster_k8s_serviceaccount_client_id=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID \
     -var aks_cluster_k8s_serviceaccount_client_secret=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET \
     -var aks_cluster_k8s_ad_server_app_secret=$FORMKUBE_AAD_SERVER_APPLICATION_SECRET \
+    -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
+    -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
     -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
     -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
     providers/$FORMKUBE_PROVIDER

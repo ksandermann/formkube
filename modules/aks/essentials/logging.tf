@@ -1,6 +1,11 @@
-#Todo
+resource "random_id" "log_analytics_workspace_name_suffix" {
+  byte_length = 8
+}
+
+#todo
 resource "azurerm_log_analytics_workspace" "platform" {
-  name                  = "testworkspacelel"
+  name = "debut1asd278968"
+  #name                  = "${replace(var.platform_fqdn, "[^a-zA-Z0-9-]", "-")}-${random_id.log_analytics_workspace_name_suffix.dec}"
   location              = azurerm_resource_group.platform.location
   resource_group_name   = azurerm_resource_group.platform.name
   sku                   = "PerGB2018"

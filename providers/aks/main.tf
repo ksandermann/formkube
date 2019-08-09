@@ -3,11 +3,16 @@ terraform {
 }
 
 provider "azurerm" {
-  version = "~> 1.31"
+  #debug
+  version = "~> 1.32.1"
 }
 
 provider "azuread" {
-  version = "~> 0.5"
+  version = "~> 0.5.1"
+}
+
+provider "random" {
+  version = "~> 2.2"
 }
 
 locals {
@@ -32,14 +37,14 @@ module "essentials" {
   platform_rg_name = var.platform_rg_name
 }
 
-
-module "aad" {
-  source = "../../modules/aks/aad"
-
-  aks_cluster_k8s_ad_server_app_secret = var.aks_cluster_k8s_ad_server_app_secret
-  platform_fqdn = local.cluster_fqdn
-
-}
+//todo: re-enable this when terraform supported granting admin consent
+//module "aad" {
+//  source = "../../modules/aks/aad"
+//
+//  aks_cluster_k8s_ad_server_app_secret = var.aks_cluster_k8s_ad_server_app_secret
+//  platform_fqdn = local.cluster_fqdn
+//
+//}
 
 module "dns" {
   source = "../../modules/aks/dns"
@@ -90,7 +95,7 @@ module "cluster" {
   aks_nodes_vm_prefix = var.aks_nodes_vm_prefix
   aks_nodes_vm_type = var.aks_nodes_vm_type
 
-  out_aks_cluster_k8s_ad_client_app_id = module.aad.out_aks_cluster_k8s_ad_client_app_id
-  out_aks_cluster_k8s_ad_server_app_id = module.aad.out_aks_cluster_k8s_ad_server_app_id
-  out_aks_cluster_k8s_ad_server_app_secret = module.aad.out_aks_cluster_k8s_ad_server_app_secret
+  aks_cluster_k8s_ad_client_app_id = var.aks_cluster_k8s_ad_client_app_id
+  aks_cluster_k8s_ad_server_app_id = var.aks_cluster_k8s_ad_server_app_id
+  aks_cluster_k8s_ad_server_app_secret = var.aks_cluster_k8s_ad_server_app_secret
 }

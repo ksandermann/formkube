@@ -25,7 +25,7 @@ platform_resource_tags_additional={"ClusterVersion" = "K8S_13.7"}
 /////////////////////////////////////////////////////AKS NODES//////////////////////////////////////////////////////////
 
 aks_nodes_amount="3"
-aks_nodes_vm_type="Standard_D4s_v3"
+aks_nodes_vm_type="Standard_DS4_v2"
 aks_nodes_vm_prefix="node"
 aks_nodes_admin_username="clusteradmin"
 aks_nodes_os_disk_size_gb="200"

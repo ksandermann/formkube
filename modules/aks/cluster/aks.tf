@@ -6,6 +6,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version              = var.aks_cluster_k8s_version
   node_resource_group             = "${var.platform_fqdn}_${var.aks_nodes_vm_prefix}s"
   tags                            = var.platform_resource_tags
+  api_server_authorized_ip_ranges = "0.0.0.0/0"
 
   agent_pool_profile {
     name                          = var.aks_nodes_vm_prefix
@@ -16,6 +17,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type                          = "AvailabilitySet"
     max_pods                      = var.aks_nodes_max_pods
     vnet_subnet_id                = var.out_cluster_subnet_id
+    //below params are needed to ensure terraform doesn't recreate the cluster when re-running apply
+    node_taints                   = []
+    enable_auto_scaling           = false
+    min_count                     = 0
+    max_count                     = 0
+    availability_zones            = []
   }
 
   linux_profile {
@@ -26,6 +33,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     }
   }
 
+  //todo create this with az cli
   service_principal {
     client_id                     = var.aks_cluster_k8s_serviceaccount_client_id
     client_secret                 = var.aks_cluster_k8s_serviceaccount_client_secret
@@ -36,11 +44,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 
     //idea: service principal used for terraform not enough permissions to see the service principal in AD ?
-    //idea: set pw to something easier
+    //https://github.com/terraform-providers/terraform-provider-azuread/issues/4#issuecomment-407542721
     azure_active_directory {
-      client_app_id               = var.out_aks_cluster_k8s_ad_client_app_id
-      server_app_id               = var.out_aks_cluster_k8s_ad_server_app_id
-      server_app_secret           = var.out_aks_cluster_k8s_ad_server_app_secret
+      client_app_id               = var.aks_cluster_k8s_ad_client_app_id
+      server_app_id               = var.aks_cluster_k8s_ad_server_app_id
+      server_app_secret           = var.aks_cluster_k8s_ad_server_app_secret
+//      tenant_id ="630b4926-3eee-47e5-b0c1-1dd833cb304a"
     }
   }
 
@@ -48,6 +57,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
     http_application_routing {
       enabled                     = false
+      //below param is needed to ensure terraform doesn't recreate the cluster when re-running apply
+      http_application_routing_zone_name  = "DoesntMatter"
     }
 
     oms_agent {
