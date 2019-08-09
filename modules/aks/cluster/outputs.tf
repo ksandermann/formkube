@@ -12,10 +12,8 @@ output "out_aks_cluster_k8s_ad_client_app_id" {
 
 output "out_aks_cluster_k8s_ad_server_app_id" {
   value =  var.aks_cluster_k8s_ad_server_app_id
-
 }
 
 output "out_aks_cluster_k8s_ad_server_app_secret" {
   value = var.aks_cluster_k8s_ad_server_app_secret
-
 }
