@@ -1,5 +1,5 @@
 resource "azurerm_dns_a_record" "loadbalancer" {
-  name                = "${var.loadbalancer_dns_name}.${var.cluster_fqdn}"
+  name                = var.loadbalancer_dns_name
   zone_name           = var.out_platform_dns_zone_name
   resource_group_name = var.out_platform_rg_name
   ttl                 = 300
