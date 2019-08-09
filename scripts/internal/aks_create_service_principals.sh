@@ -28,7 +28,7 @@ echo "Success!"
 echo "Sleeping 30 sec to ensure Azure AD propagation..."
 sleep 30
 echo "Creating a service principal for the Azure AD server application if it doesnt exist..."
-az ad sp show --id $serverApplicationId >/dev/null || az ad sp create --id $serverApplicationId
+az ad sp show --id $serverApplicationId || az ad sp create --id $serverApplicationId
 echo "Success!"
 
 echo "Setting the server service principal secret..."
@@ -68,7 +68,7 @@ echo "Success!"
 echo "Sleeping 30 sec to ensure Azure AD propagation..."
 sleep 30
 echo "Creating a service principal for the Azure AD server application if it doesnt exist..."
-az ad sp show --id $clientApplicationId >/dev/null || az ad sp create --id $clientApplicationId  -o none
+az ad sp show --id $clientApplicationId || az ad sp create --id $clientApplicationId  -o none
 echo "Success!"
 
 echo "Adding OAuth permissions for the server application to the client service principal...."
