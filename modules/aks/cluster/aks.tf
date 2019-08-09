@@ -47,7 +47,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
       server_app_id               = var.aks_cluster_k8s_ad_server_app_id
       server_app_secret           = var.aks_cluster_k8s_ad_server_app_secret
       //todo get this from environment variable
-      //tenant_id ="630b4926-3eee-47e5-b0c1-1dd833cb304a"
+      //tenant_id ="abdef"
     }
   }
 
