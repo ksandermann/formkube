@@ -15,56 +15,23 @@ docker run -it --rm ksandermann/cloud-toolbox:latest bash
 
 ## AKS Provider-Specific Tasks
 
-### Granting permissions for Formkube Service Principle
+### Automatic creation of the Azure AD applications and service principles
 
-The Service Principle needs to have the following permissions to permissions:
+When using the default installation, you will be asked to interactively login to Azure. You will need to login with a user that has the "Global admistrator" role.
 
-```json
-{
-  [...],
-  "requiredResourceAccess": [
-    {
-      "resourceAppId": "00000002-0000-0000-c000-000000000000",
-      "resourceAccess": [
-        {
-          "id": "311a71cc-e848-46a1-bdf8-97ff7156d8e6",
-          "type": "Scope"
-        },
-        {
-          "id": "1cda74f2-2616-4834-b122-5cb1b07f8a59",
-          "type": "Role"
-        }
-      ]
-    }
-  ],
-  [...]
-}
-```
+The script will automatically create all needed service principles and applications for Azure Active Directory to integrate with Azure Kubernetes Service and pass the values to terraform.
 
-They can be set via Web UI:
+### Manual creation of Azure AD applicaitons and service principles
 
-1. Navigate to `Azure Active Directory` -> `App registrations`
-1. Select your Service Principal
-1. Navigate to `API Permissions`
-1. Add a permission
-   1. Select unter the heading `Supported legacy APIs` `Azure Active Directory Graph`
-   1. Select `Application permissions`
-   1. Grant the permission `Application.ReadWrite.All`
-1. Add a permission
-   1. Select unter the heading `Supported legacy APIs` `Azure Active Directory Graph`
-   1. Select `Delegated permissions`
-   1. Grant the permission `User.Read`
-1. Click on the button `Grant admin consent for directory`
+You could also create the necessary applications and service princliples yourself. If you do so, you need to provide the environment variables `FORMKUBE_AAD_CLIENT_APPLICATION_ID`, `FORMKUBE_AAD_SERVER_APPLICATION_ID` and `FORMKUBE_AAD_SERVER_APPLICATION_SECRET`.
 
-Or via Azure CLI: (set the environment variable `FORMKUBE_CLIENT_ID`)
+A tutorial on how to create the applications and service principles can be found in the [official Microsoft documentation on Integrate Azure Active Directory with Azure Kubernetes Service](https://docs.microsoft.com/en-gb/azure/aks/azure-ad-integration-cli).
+You must not execute anything beyond the section "Create Azure AD client component". After granting the privileges for the client application you can retrieve the values of the variables like this:
 
 ```sh
-az ad app permission add \
-    --id $FORMKUBE_CLIENT_ID \
-    --api 00000002-0000-0000-c000-000000000000 \
-    --api-permissions 311a71cc-e848-46a1-bdf8-97ff7156d8e6=Scope 1cda74f2-2616-4834-b122-5cb1b07f8a59=Role
-az ad app permission grant --id $FORMKUBE_CLIENT_ID --api 00000002-0000-0000-c000-000000000000
-az ad app permission admin-consent --id  $FORMKUBE_CLIENT_ID
+export FORMKUBE_AAD_CLIENT_APPLICATION_ID=$clientApplicationId
+export FORMKUBE_AAD_SERVER_APPLICATION_ID=$serverApplicationId
+export FORMKUBE_AAD_SERVER_APPLICATION_SECRET=$serverApplicationSecret
 ```
 
 ## Manual Credential Configuration
