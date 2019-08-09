@@ -8,7 +8,7 @@ IFS=$'\n\t'
 
 echo "Please login with an Azure AD Global Administrator user."
 
-az login
+az login -o none
 
 if [ -z ${FORMKUBE_AAD_SERVER_APPLICATION_SECRET+x} ]; then
     read -p "Enter Azure AD Server Application Secret: " fk_int_aad_server_app_secret
