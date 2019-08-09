@@ -46,7 +46,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
       client_app_id               = var.aks_cluster_k8s_ad_client_app_id
       server_app_id               = var.aks_cluster_k8s_ad_server_app_id
       server_app_secret           = var.aks_cluster_k8s_ad_server_app_secret
-//      tenant_id ="630b4926-3eee-47e5-b0c1-1dd833cb304a"
+      //todo get this from environment variable
+      //tenant_id ="630b4926-3eee-47e5-b0c1-1dd833cb304a"
     }
   }
 
@@ -75,7 +76,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   lifecycle {
     ignore_changes                = [
-      "network_profile"
+      "network_profile",
+      "service_principal"
     ]
   }
 }
