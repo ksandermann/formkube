@@ -26,8 +26,8 @@ serverApplicationId=$(az ad app create \
     --query appId -o tsv)
 echo "Success!"
 
-echo "Sleeping 10 sec to ensure Azure AD propagation..."
-sleep 10
+echo "Sleeping 30 sec to ensure Azure AD propagation..."
+sleep 30
 echo "Creating a service principal for the Azure AD server application if it doesnt exist..."
 #cannot be forwarded to /dev/null
 az ad sp show --id $serverApplicationId || az ad sp create --id $serverApplicationId
@@ -67,8 +67,8 @@ clientApplicationId=$(az ad app create \
     --query appId -o tsv)
 echo "Success!"
 
-echo "Sleeping 10 sec to ensure Azure AD propagation..."
-sleep 10
+echo "Sleeping 30 sec to ensure Azure AD propagation..."
+sleep 30
 echo "Creating a service principal for the Azure AD server application if it doesnt exist..."
 #cannot be forwarded to /dev/null
 az ad sp show --id $clientApplicationId || az ad sp create --id $clientApplicationId  -o none
