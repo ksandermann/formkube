@@ -4,6 +4,7 @@ IFS=$'\n\t'
 
 
 if [ "$FORMKUBE_PROVIDER" == "aks" ] && [ -z ${FORMKUBE_AAD_SERVER_APPLICATION_ID+x} ] && [ -z ${FORMKUBE_AAD_CLIENT_APPLICATION_ID+x} ] ; then
+    echo "Not all environment variables FORMKUBE_AAD_SERVER_APPLICATION_SECRET, FORMKUBE_AAD_SERVER_APPLICATION_ID, FORMKUBE_AAD_CLIENT_APPLICATION_ID were set."
     source /root/project/scripts/internal/aks_create_service_principals.sh
 fi
 

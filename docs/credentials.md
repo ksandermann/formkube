@@ -106,7 +106,10 @@ echo "Setting environment variables for FormKube"
 export FORMKUBE_SUBSCRIPTION_ID=abcde-abcde-abcde-abcde
 export FORMKUBE_CLIENT_ID=abcde-abcde-abcde-abcde
 export FORMKUBE_CLIENT_SECRET=abcde-abcde-abcde-abcde
-export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcde
+export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcdeexport 
+export FORMKUBE_AAD_SERVER_APPLICATION_SECRET=abcde-abcde-abcde-abcdeexport 
+export FORMKUBE_AAD_SERVER_APPLICATION_ID=abcde-abcde-abcde-abcdeexport 
+export FORMKUBE_AAD_CLIENT_APPLICATION_ID=abcde-abcde-abcde-abcdeexport 
 ```
 
 

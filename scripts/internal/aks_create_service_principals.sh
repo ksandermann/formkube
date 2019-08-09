@@ -5,7 +5,7 @@ IFS=$'\n\t'
 
 #https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration-cli
 
-echo "Not all environment variables FORMKUBE_AAD_SERVER_APPLICATION_SECRET, FORMKUBE_AAD_SERVER_APPLICATION_ID, FORMKUBE_AAD_CLIENT_APPLICATION_ID were set."
+
 echo "Please login with an Azure AD Global Administrator user."
 
 az login
@@ -26,6 +26,8 @@ serverApplicationId=$(az ad app create \
     --query appId -o tsv)
 echo "Success!"
 
+echo "Sleeping 10 sec to ensure Azure AD propagation..."
+sleep 10
 echo "Creating a service principal for the Azure AD server application if it doesnt exist..."
 az ad sp show --id $serverApplicationId >/dev/null || az ad sp create --id $serverApplicationId
 echo "Success!"
@@ -50,6 +52,8 @@ echo "Granting added permissions on Microsoft Graph API..."
 az ad app permission grant --id $serverApplicationId --api 00000003-0000-0000-c000-000000000000 -o none
 echo "Success!"
 
+echo "Sleeping 30 sec to ensure Azure AD propagation..."
+sleep 30
 echo "Giving admin-consent to added permissions...."
 az ad app permission admin-consent --id  $serverApplicationId -o none
 echo "Success!"
@@ -62,8 +66,10 @@ clientApplicationId=$(az ad app create \
     --query appId -o tsv)
 echo "Success!"
 
+echo "Sleeping 10 sec to ensure Azure AD propagation..."
+sleep 10
 echo "Creating a service principal for the Azure AD server application if it doesnt exist..."
-az ad sp show --id $clientApplicationId || az ad sp create --id $clientApplicationId  -o none
+az ad sp show --id $clientApplicationId >/dev/null || az ad sp create --id $clientApplicationId  -o none
 echo "Success!"
 
 echo "Adding OAuth permissions for the server application to the client service principal...."
@@ -71,6 +77,8 @@ oAuthPermissionId=$(az ad app show --id $serverApplicationId --query "oauth2Perm
 az ad app permission add --id $clientApplicationId --api $serverApplicationId --api-permissions $oAuthPermissionId=Scope -o none
 echo "Success!"
 
+echo "Sleeping 30 sec to ensure Azure AD propagation..."
+sleep 30
 echo "Giving admin-consent to added permissions...."
 az ad app permission grant --id $clientApplicationId --api $serverApplicationId -o none
 echo "Success!"
@@ -78,6 +86,5 @@ echo "Success!"
 
 export FORMKUBE_AAD_SERVER_APPLICATION_ID=$serverApplicationId
 export FORMKUBE_AAD_CLIENT_APPLICATION_ID=$clientApplicationId
-
 
 az logout

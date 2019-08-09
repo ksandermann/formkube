@@ -6,7 +6,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   kubernetes_version              = var.aks_cluster_k8s_version
   node_resource_group             = "${var.platform_fqdn}_${var.aks_nodes_vm_prefix}s"
   tags                            = var.platform_resource_tags
-  api_server_authorized_ip_ranges = "0.0.0.0/0"
 
   agent_pool_profile {
     name                          = var.aks_nodes_vm_prefix
@@ -20,8 +19,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     //below params are needed to ensure terraform doesn't recreate the cluster when re-running apply
     node_taints                   = []
     enable_auto_scaling           = false
-    min_count                     = 0
-    max_count                     = 0
     availability_zones            = []
   }
 
@@ -57,8 +54,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
     http_application_routing {
       enabled                     = false
-      //below param is needed to ensure terraform doesn't recreate the cluster when re-running apply
-      http_application_routing_zone_name  = "DoesntMatter"
     }
 
     oms_agent {
