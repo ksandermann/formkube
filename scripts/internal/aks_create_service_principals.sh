@@ -1,10 +1,9 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 IFS=$'\n\t'
 
 
 #https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration-cli
-
 
 echo "Please login with an Azure AD Global Administrator user."
 
@@ -13,7 +12,7 @@ az login -o none
 if [ -z ${FORMKUBE_AAD_SERVER_APPLICATION_SECRET+x} ]; then
     read -p "Enter Azure AD Server Application Secret: " fk_int_aad_server_app_secret
 else
-    fk_int_aad_server_app_secret=FORMKUBE_AAD_SERVER_APPLICATION_SECRET
+    fk_int_aad_server_app_secret=$FORMKUBE_AAD_SERVER_APPLICATION_SECRET
     echo "Picked up Azure AD Server Application Secretfrom environment variable FORMKUBE_AAD_SERVER_APPLICATION_SECRET!"
 fi
 
@@ -26,10 +25,10 @@ serverApplicationId=$(az ad app create \
     --query appId -o tsv)
 echo "Success!"
 
-echo "Sleeping 10 sec to ensure Azure AD propagation..."
-sleep 10
+echo "Sleeping 30 sec to ensure Azure AD propagation..."
+sleep 30
 echo "Creating a service principal for the Azure AD server application if it doesnt exist..."
-az ad sp show --id $serverApplicationId >/dev/null || az ad sp create --id $serverApplicationId
+az ad sp show --id $serverApplicationId || az ad sp create --id $serverApplicationId
 echo "Success!"
 
 echo "Setting the server service principal secret..."
@@ -66,10 +65,10 @@ clientApplicationId=$(az ad app create \
     --query appId -o tsv)
 echo "Success!"
 
-echo "Sleeping 10 sec to ensure Azure AD propagation..."
-sleep 10
+echo "Sleeping 30 sec to ensure Azure AD propagation..."
+sleep 30
 echo "Creating a service principal for the Azure AD server application if it doesnt exist..."
-az ad sp show --id $clientApplicationId >/dev/null || az ad sp create --id $clientApplicationId  -o none
+az ad sp show --id $clientApplicationId || az ad sp create --id $clientApplicationId  -o none
 echo "Success!"
 
 echo "Adding OAuth permissions for the server application to the client service principal...."
