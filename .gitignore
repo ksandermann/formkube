@@ -7,3 +7,6 @@
 *.lock.info
 */ssh_keys/*
 clusters/*
+!clusters/aks-samplecluster.example.com
+!clusters/azure-samplecluster-dev.example.com
+!clusters/azure-samplecluster-prd.example.com

@@ -13,6 +13,27 @@ Docker container containing Azure CLI:
 docker run -it --rm ksandermann/cloud-toolbox:latest bash
 ```
 
+## AKS Provider-Specific Tasks
+
+### Automatic creation of the Azure AD applications and service principles
+
+When using the default installation, you will be asked to interactively login to Azure. You will need to login with a user that has the "Global admistrator" role.
+
+The script will automatically create all needed service principles and applications for Azure Active Directory to integrate with Azure Kubernetes Service and pass the values to terraform.
+
+### Manual creation of Azure AD applicaitons and service principles
+
+You could also create the necessary applications and service princliples yourself. If you do so, you need to provide the environment variables `FORMKUBE_AAD_CLIENT_APPLICATION_ID`, `FORMKUBE_AAD_SERVER_APPLICATION_ID` and `FORMKUBE_AAD_SERVER_APPLICATION_SECRET`.
+
+A tutorial on how to create the applications and service principles can be found in the [official Microsoft documentation on Integrate Azure Active Directory with Azure Kubernetes Service](https://docs.microsoft.com/en-gb/azure/aks/azure-ad-integration-cli).
+You must not execute anything beyond the section "Create Azure AD client component". After granting the privileges for the client application you can retrieve the values of the variables like this:
+
+```sh
+export FORMKUBE_AAD_CLIENT_APPLICATION_ID=$clientApplicationId
+export FORMKUBE_AAD_SERVER_APPLICATION_ID=$serverApplicationId
+export FORMKUBE_AAD_SERVER_APPLICATION_SECRET=$serverApplicationSecret
+```
+
 ## Manual Credential Configuration
 
 When starting FormKube, you will therefore be prompted to enter the following credentials:
@@ -52,9 +73,13 @@ echo "Setting environment variables for FormKube"
 export FORMKUBE_SUBSCRIPTION_ID=abcde-abcde-abcde-abcde
 export FORMKUBE_CLIENT_ID=abcde-abcde-abcde-abcde
 export FORMKUBE_CLIENT_SECRET=abcde-abcde-abcde-abcde
-export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcde
+export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcdeexport 
+export FORMKUBE_AAD_SERVER_APPLICATION_SECRET=abcde-abcde-abcde-abcdeexport 
+export FORMKUBE_AAD_SERVER_APPLICATION_ID=abcde-abcde-abcde-abcdeexport 
+export FORMKUBE_AAD_CLIENT_APPLICATION_ID=abcde-abcde-abcde-abcdeexport 
 ```
 
 
 # Authors
 1. [ksandermann](https://github.com/ksandermann)
+2. [sbibow](https://github.com/sbibow)

@@ -14,6 +14,11 @@ if [ "$FORMKUBE_DEVELOPMENT_MODE" == "true" ]; then
     echo -e "Caution: FormKube is running in development mode. Destroying EVERYTHING."
     echo -e "\e[39m\e[0m\e[49m\n"
     terraform destroy \
+    -var aks_cluster_k8s_serviceaccount_client_id=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID \
+    -var aks_cluster_k8s_serviceaccount_client_secret=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET \
+    -var aks_cluster_k8s_ad_server_app_secret=$FORMKUBE_AAD_SERVER_APPLICATION_SECRET \
+    -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
+    -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
     -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
     -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
     -auto-approve \
@@ -29,6 +34,11 @@ else
     terraform state rm -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate module.essentials.azurerm_resource_group.platform  &>/dev/null
 
     terraform destroy \
+    -var aks_cluster_k8s_serviceaccount_client_id=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID \
+    -var aks_cluster_k8s_serviceaccount_client_secret=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET \
+    -var aks_cluster_k8s_ad_server_app_secret=$FORMKUBE_AAD_SERVER_APPLICATION_SECRET \
+    -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
+    -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
     -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
     -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
     providers/$FORMKUBE_PROVIDER
@@ -36,7 +46,7 @@ else
     echo -e "\e[1m\e[41m\e[97m\n"
     echo -e "Caution: Did not destroy resource group to prevent destroying infrastructure managed by other providers.\n"
     echo -e "Caution: Did not destroy backup vault to keep backups in case of accidentally deletion.\n"
-    echo -e "Caution: Did not destroy DNS zone to keep Azure nameserver in case of external registrar usage.\n"
+    echo -e "Caution: Did not destroy DNS zone to keep Azure nameservers in case of external registrar usage.\n"
 
     if [ "$FORMKUBE_MASTER_DISKS_DELETED" == "false" ]; then
        echo -e "Caution: Did not destroy disks of masters to prevent accidental data loss.\n"
