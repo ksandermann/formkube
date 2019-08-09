@@ -16,11 +16,19 @@ For more information about DNS, take a look at the [DNS Architecture and Configu
 
 ### Configuring Loadbalancer CNAME
 
-When deploying the cluster using the AKS provider, you will need to deploy the loadbalancer on you own using the Kubernetes
-Service Type *Loadbalancer*. Usually, you will only use this Service Type once for your Ingresscontroller. After the 
-Loadbalancer was created, you will need to change the A-Record for the Loadbalancer inside the created DNS Zone manually
-to the IP address of the loadbalancer that was created by Kubernetes. All of the other records are CNAMEs based onto 
+When deploying the cluster using the AKS provider, you will need to deploy the loadbalancer on your own using the Kubernetes
+Service Type *Loadbalancer*. Usually, you will only use this Service Type once for your Ingresscontroller.
+ 
+You will **either** have to
+
+specify the public IP that was created by FormKube especially for this Kubernetes Loadbalancer
+
+**or** you need to 
+
+change the A-Record for the Loadbalancer inside the created DNS Zone manually to the IP address of the
+loadbalancer that was created by Kubernetes. All of the other records are CNAMEs based onto 
 that A-Record and do not need to be changed.
+
 
 ### Accessing your cluster
 
@@ -31,6 +39,9 @@ with running:
 ```bash
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --admin
 ```
+
+Alternatively, FormKube will output the admin kube config and the user kube config after successfully bootstrapping a 
+cluster.
 
 ## Azure Provider-Specific Tasks
 
