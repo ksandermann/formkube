@@ -1,4 +1,4 @@
-# FormKube - Bootstrap the Infrastructure for Vanilla Kubernetes/OpenShift or a fully managed AKS Kubernetes Cluster on Azure
+# FormKube - Bootstrap the Infrastructure for Vanilla Kubernetes/OpenShift or deploy a fully managed AKS Kubernetes Cluster on Azure
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
