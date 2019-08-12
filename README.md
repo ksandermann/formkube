@@ -1,9 +1,9 @@
-# FormKube - Bootstrap the Infrastructure for Kubernetes and OpenShift on Azure
+# FormKube - Bootstrap the Infrastructure for Vanilla Kubernetes/OpenShift or a fully managed AKS Kubernetes Cluster on Azure
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 FormKube allows you to bootstrap all the needed infrastructure components to deploy Kubernetes or OpenShift clusters
-on Azure.
+on Azure. Additionally, FormKube allows you to bootstrap a fully managed and integrated AKS Cluster.
 
 It's basically the infrastructure part of tectonic-installer for Azure, extended by various features such as multi-zone 
 high-availability, scheduled backup and others.
