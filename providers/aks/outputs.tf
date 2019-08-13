@@ -7,7 +7,7 @@ output "user_kube_config" {
 }
 
 output "loadbalancer_public_ip" {
-  value = module.dns.out_loadbalancer_public_ip
+  value = module.cluster.out_loadbalancer_public_ip
 }
 
 output "aad_client_app_id" {

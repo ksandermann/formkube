@@ -97,4 +97,5 @@ module "cluster" {
   aks_cluster_k8s_ad_client_app_id = var.aks_cluster_k8s_ad_client_app_id
   aks_cluster_k8s_ad_server_app_id = var.aks_cluster_k8s_ad_server_app_id
   aks_cluster_k8s_ad_server_app_secret = var.aks_cluster_k8s_ad_server_app_secret
+  loadbalancer_dns_name = var.loadbalancer_dns_name
 }

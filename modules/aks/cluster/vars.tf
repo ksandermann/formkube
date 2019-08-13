@@ -65,6 +65,10 @@ variable "aks_cluster_k8s_version" {
   description = "Kubernetes Version of the AKS cluster."
 }
 
+variable "loadbalancer_dns_name" {
+  type = "string"
+  description = "Name of the loadbalancer. This will be used for DNS entries and ressource names. Example: alb"
+}
 
 /////////////////////////////////////////////////////AKS-NODES///////////////////////////////////////////////////////////
 

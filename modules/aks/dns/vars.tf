@@ -22,7 +22,6 @@ variable "platform_resource_tags"  {
 
 /////////////////////////////////////////////////////LOADBALANCER/DNS///////////////////////////////////////////////////
 
-
 variable "loadbalancer_dns_name" {
   type = "string"
   description = "Name of the loadbalancer. This will be used for DNS entries and ressource names. Example: alb"
