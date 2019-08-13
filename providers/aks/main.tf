@@ -45,22 +45,6 @@ module "essentials" {
 //
 //}
 
-module "dns" {
-  source = "../../modules/aks/dns"
-
-  cluster_fqdn = local.cluster_fqdn
-  loadbalancer_dns_additional_cnames = var.loadbalancer_dns_additional_cnames
-  loadbalancer_dns_default_cnames = var.loadbalancer_dns_default_cnames
-  loadbalancer_dns_name = var.loadbalancer_dns_name
-  loadbalancer_dns_ops_additional_cnames = var.loadbalancer_dns_ops_additional_cnames
-  loadbalancer_dns_ops_default_cnames = var.loadbalancer_dns_ops_default_cnames
-  loadbalancer_dns_ttl = var.loadbalancer_dns_ttl
-  out_platform_dns_zone_name = module.essentials.out_platform_dns_zone_name
-  out_platform_rg_name = module.essentials.out_platform_rg_name
-  platform_location = var.platform_location
-  platform_resource_tags = local.platform_all_resource_tags
-}
-
 
 module "vnet" {
   source = "../../modules/aks/vnet"
@@ -98,4 +82,10 @@ module "cluster" {
   aks_cluster_k8s_ad_server_app_id = var.aks_cluster_k8s_ad_server_app_id
   aks_cluster_k8s_ad_server_app_secret = var.aks_cluster_k8s_ad_server_app_secret
   loadbalancer_dns_name = var.loadbalancer_dns_name
+  loadbalancer_dns_additional_cnames = var.loadbalancer_dns_additional_cnames
+  loadbalancer_dns_default_cnames = var.loadbalancer_dns_default_cnames
+  loadbalancer_dns_ops_additional_cnames = var.loadbalancer_dns_ops_additional_cnames
+  loadbalancer_dns_ops_default_cnames =var.loadbalancer_dns_ops_default_cnames
+  loadbalancer_dns_ttl = var.loadbalancer_dns_ttl
+  out_platform_dns_zone_name = module.essentials.out_platform_dns_zone_name
 }

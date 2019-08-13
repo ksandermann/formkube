@@ -5,7 +5,7 @@ resource "azurerm_dns_cname_record" "apps" {
   resource_group_name = var.out_platform_rg_name
   ttl                 = var.loadbalancer_dns_ttl
   //target
-  record              = "${azurerm_dns_a_record.loadbalancer.name}.${var.cluster_fqdn}"
+  record              = "${azurerm_dns_a_record.loadbalancer.name}.${var.platform_fqdn}"
   tags                = var.platform_resource_tags
 }
 
@@ -14,7 +14,7 @@ resource "azurerm_dns_cname_record" "wildcard_apps" {
   zone_name           = var.out_platform_dns_zone_name
   resource_group_name = var.out_platform_rg_name
   ttl                 = var.loadbalancer_dns_ttl
-  record              = "${azurerm_dns_cname_record.apps.name}.${var.cluster_fqdn}"
+  record              = "${azurerm_dns_cname_record.apps.name}.${var.platform_fqdn}"
   tags                = var.platform_resource_tags
 }
 
@@ -24,7 +24,7 @@ resource "azurerm_dns_cname_record" "ops" {
   zone_name           = var.out_platform_dns_zone_name
   resource_group_name = var.out_platform_rg_name
   ttl                 = var.loadbalancer_dns_ttl
-  record              = "${azurerm_dns_a_record.loadbalancer.name}.${var.cluster_fqdn}"
+  record              = "${azurerm_dns_a_record.loadbalancer.name}.${var.platform_fqdn}"
   tags                = var.platform_resource_tags
 }
 
@@ -34,7 +34,7 @@ resource "azurerm_dns_cname_record" "ops_default_cnames" {
   zone_name           = var.out_platform_dns_zone_name
   resource_group_name = var.out_platform_rg_name
   ttl                 = var.loadbalancer_dns_ttl
-  record              = "${azurerm_dns_cname_record.ops.name}.${var.cluster_fqdn}"
+  record              = "${azurerm_dns_cname_record.ops.name}.${var.platform_fqdn}"
   tags                = var.platform_resource_tags
 }
 
@@ -44,7 +44,7 @@ resource "azurerm_dns_cname_record" "ops_additional_cnames" {
   zone_name           = var.out_platform_dns_zone_name
   resource_group_name = var.out_platform_rg_name
   ttl                 = var.loadbalancer_dns_ttl
-  record              = "${azurerm_dns_cname_record.ops.name}.${var.cluster_fqdn}"
+  record              = "${azurerm_dns_cname_record.ops.name}.${var.platform_fqdn}"
   tags                = var.platform_resource_tags
 }
 
@@ -54,7 +54,7 @@ resource "azurerm_dns_cname_record" "default_cnames" {
   zone_name           = var.out_platform_dns_zone_name
   resource_group_name = var.out_platform_rg_name
   ttl                 = var.loadbalancer_dns_ttl
-  record              = "${azurerm_dns_a_record.loadbalancer.name}.${var.cluster_fqdn}"
+  record              = "${azurerm_dns_a_record.loadbalancer.name}.${var.platform_fqdn}"
   tags                = var.platform_resource_tags
 }
 
@@ -64,6 +64,6 @@ resource "azurerm_dns_cname_record" "additional_cnames" {
   zone_name           = var.out_platform_dns_zone_name
   resource_group_name = var.out_platform_rg_name
   ttl                 = var.loadbalancer_dns_ttl
-  record              = "${azurerm_dns_a_record.loadbalancer.name}.${var.cluster_fqdn}"
+  record              = "${azurerm_dns_a_record.loadbalancer.name}.${var.platform_fqdn}"
   tags                = var.platform_resource_tags
 }
