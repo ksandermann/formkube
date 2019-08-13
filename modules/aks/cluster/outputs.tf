@@ -17,3 +17,7 @@ output "out_aks_cluster_k8s_ad_server_app_id" {
 output "out_aks_cluster_k8s_ad_server_app_secret" {
   value = var.aks_cluster_k8s_ad_server_app_secret
 }
+
+output "out_loadbalancer_public_ip" {
+  value = azurerm_public_ip.loadbalancer.ip_address
+}
