@@ -1,4 +1,5 @@
 resource "azurerm_container_registry" "acr" {
+  count                    = var.registry_enabled ? 1 : 0
   name                     = "${var.platform_fqdn}containerRegistry"
   resource_group_name      = var.out_platform_rg_name
   location                 = var.platform_location

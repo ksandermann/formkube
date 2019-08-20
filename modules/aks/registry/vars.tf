@@ -18,6 +18,12 @@ variable "platform_resource_tags"  {
   description = "All tags added to all Azure ressources."
 }
 
+variable "registry_enabled" {
+  type        = bool
+  default     = false
+  description = "Specify whether or not to install a container registry"
+}
+
 variable "registry_sku" {
   type        = "string"
   default     = "Premium"
