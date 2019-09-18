@@ -50,4 +50,13 @@ else
     providers/$FORMKUBE_PROVIDER
 fi
 
-terraform apply  -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
+terraform apply -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
+
+
+if [ "$FORMKUBE_PROVIDER" == "aks" ]; then
+
+terraform output -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate admin_kube_config
+terraform output -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate user_kube_config
+
+fi
+
