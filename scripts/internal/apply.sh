@@ -15,10 +15,7 @@ source /root/project/scripts/internal/az_login.sh
 terraform init -input=false providers/$FORMKUBE_PROVIDER
 
 
-#TODO only pass aks_ vars of provider=aks
-
 source /root/project/scripts/internal/plan.sh
-
 
 
 terraform apply -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan

@@ -18,6 +18,7 @@ if [ "$FORMKUBE_PROVIDER" == "aks" ]; then
       -var aks_cluster_k8s_ad_server_app_secret=$FORMKUBE_AAD_SERVER_APPLICATION_SECRET \
       -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
       -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
+      -var aks_cluster_k8s_ad_tenant_id=$FORMKUBE_TENANT_ID \
       -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
       providers/$FORMKUBE_PROVIDER
   else
@@ -27,6 +28,7 @@ if [ "$FORMKUBE_PROVIDER" == "aks" ]; then
       -var aks_cluster_k8s_ad_server_app_secret=$FORMKUBE_AAD_SERVER_APPLICATION_SECRET \
       -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
       -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
+      -var aks_cluster_k8s_ad_tenant_id=$FORMKUBE_TENANT_ID \
       -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
       -out clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
       -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
