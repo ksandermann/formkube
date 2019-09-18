@@ -4,7 +4,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name             = var.out_platform_rg_name
   dns_prefix                      = "api-${var.cluster_name}"
   kubernetes_version              = var.aks_cluster_k8s_version
-  node_resource_group             = "${var.platform_fqdn}_ClusterResources"
+  node_resource_group             = "${var.out_platform_rg_name}_ClusterResources"
   tags                            = var.platform_resource_tags
 
   agent_pool_profile {
