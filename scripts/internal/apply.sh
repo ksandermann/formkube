@@ -15,7 +15,7 @@ source /root/project/scripts/internal/az_login.sh
 terraform init -input=false providers/$FORMKUBE_PROVIDER
 
 
-
+#TODO only pass aks_ vars of provider=aks
 
 #development mode, disable backup
 if [ "$FORMKUBE_DEVELOPMENT_MODE" == "true" ]; then
