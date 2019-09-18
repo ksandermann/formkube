@@ -2,6 +2,10 @@
 set -uo pipefail
 IFS=$'\n\t'
 
+#https://github.com/ksandermann/cloud-toolbox
+export FORMKUBE_BOOTSTRAP_ENVIRONMENT="ksandermann/cloud-toolbox:2019-09-17_01"
+
+
 if [ -z ${FORMKUBE_CLUSTER+x} ]; then
     echo "Environment variable FORMKUBE_CLUSTER is not set."
     read -p "Please enter the name of the folder inside 'clusters' where your configuration is stored: " fk_int_cluster
@@ -14,8 +18,6 @@ if [ -z ${FORMKUBE_PROVIDER+x} ]; then
     export FORMKUBE_PROVIDER=$fk_int_provider
 fi
 
-#https://github.com/ksandermann/cloud-toolbox
-export FORMKUBE_BOOTSTRAP_ENVIRONMENT="ksandermann/cloud-toolbox:2019-08-08_01"
 
 echo "Downloading latest version of FormKube runtime -  '$FORMKUBE_BOOTSTRAP_ENVIRONMENT'..."
 docker pull $FORMKUBE_BOOTSTRAP_ENVIRONMENT  &>/dev/null
