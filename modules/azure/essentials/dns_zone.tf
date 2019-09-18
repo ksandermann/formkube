@@ -8,8 +8,3 @@ resource "azurerm_dns_zone" "platform" {
   tags                = var.platform_resource_tags
   depends_on          = [azurerm_resource_group.platform]
 }
-
-output "out_platform_dns_zone_name_servers" {
-  value       = azurerm_dns_zone.platform.name_servers
-  description = "A list of values that make up the NS record for the zone."
-}

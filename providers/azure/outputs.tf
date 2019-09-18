@@ -8,9 +8,9 @@ output "out_platform_dns_zone_name_servers" {
   description = "A list of values that make up the NS record for the zone."
 }
 
-output "out_bastions_nics_ips" {
-  value       = module.vnet.out_bastions_nics_ips
-  description = "Private IPs of the NICs created for the bastions."
+output "out_bastions_nics_public_ips" {
+  value       = module.vnet.out_bastions_nics_public_ips
+  description = "Public IPs of the NICs created for the bastions."
 }
 
 output "out_masters_nics_ips" {
