@@ -15,7 +15,7 @@ resource "azurerm_network_interface" "bastions" {
     subnet_id                     = azurerm_subnet.bastions.id
     private_ip_address_allocation = "Static"
     private_ip_address_version    = "IPv4"
-    // mbstions start with IP 10 in subnet
+    //bastions start with IP 10 in subnet
     private_ip_address            = cidrhost(var.platform_network_bastion_subnet_CIDR, count.index + 10 )
     public_ip_address_id          = azurerm_public_ip.bastions.*.id[count.index]
   }
@@ -37,7 +37,7 @@ resource "azurerm_network_interface" "masters" {
     subnet_id                     = azurerm_subnet.cluster.id
     private_ip_address_allocation = "Static"
     private_ip_address_version    = "IPv4"
-    // masters start with IP 10 in subnet
+    //masters start with IP 10 in subnet
     private_ip_address            = cidrhost(var.platform_network_cluster_subnet_CIDR, count.index + 10)
   }
 }
@@ -58,7 +58,7 @@ resource "azurerm_network_interface" "computenodes" {
     subnet_id                     = azurerm_subnet.cluster.id
     private_ip_address_allocation = "Static"
     private_ip_address_version    = "IPv4"
-    // computenodes start with IP 100 in the subnet
+    //computenodes start with IP 100 in the subnet
     private_ip_address            = cidrhost(var.platform_network_cluster_subnet_CIDR, count.index + 100)
   }
 }
@@ -79,7 +79,7 @@ resource "azurerm_network_interface" "infranodes" {
     subnet_id                       = azurerm_subnet.cluster.id
     private_ip_address_allocation   = "Static"
     private_ip_address_version      = "IPv4"
-    // infranodes start with IP 200 in the subnet
+    //infranodes start with IP 200 in the subnet
     private_ip_address              = cidrhost(var.platform_network_cluster_subnet_CIDR, count.index + 200)
   }
 }
