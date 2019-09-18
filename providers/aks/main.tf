@@ -1,13 +1,13 @@
 terraform {
-  required_version = "0.12.6"
+  required_version = "0.12.8"
 }
 
 provider "azurerm" {
-  version = "~> 1.32.1"
+  version = "~> 1.34.0"
 }
 
 provider "azuread" {
-  version = "~> 0.5.1"
+  version = "~> 0.6.0"
 }
 
 provider "random" {
