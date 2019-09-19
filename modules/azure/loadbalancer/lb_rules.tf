@@ -7,8 +7,9 @@ resource "azurerm_lb_rule" "ingresscontroller" {
   backend_port                   = var.loadbalancer_ingresscontroller_backend_port
   frontend_ip_configuration_name = azurerm_lb.loadbalancer.frontend_ip_configuration.0.name
   backend_address_pool_id        = azurerm_lb_backend_address_pool.nodes.id
-  // KNOWN ISSUE - see README.MD
-  // probe_id                    = "${azurerm_lb_probe.ingress_controller.id}}"
+  //https://github.com/hashicorp/terraform/issues/9311#issuecomment-254068526
+  //https://github.com/Azure/azure-quickstart-templates/blob/master/201-2-vms-loadbalancer-lbrules/azuredeploy.json
+  probe_id                       = "${azurerm_lb.loadbalancer.id}/probes/${azurerm_lb_probe.ingresscontroller.name}"
   idle_timeout_in_minutes        = 5
   disable_outbound_snat          = false
   load_distribution              = "SourceIPProtocol"
@@ -23,8 +24,9 @@ resource "azurerm_lb_rule" "k8s_api" {
   backend_port                   = var.loadbalancer_k8s_api_backend_port
   frontend_ip_configuration_name = azurerm_lb.loadbalancer.frontend_ip_configuration.0.name
   backend_address_pool_id        = azurerm_lb_backend_address_pool.masters.id
-  // KNOWN ISSUE - see README.MD
-  // probe_id                    = "${azurerm_lb_probe.ingress_controller.id}}"
+  //https://github.com/hashicorp/terraform/issues/9311#issuecomment-254068526
+  //https://github.com/Azure/azure-quickstart-templates/blob/master/201-2-vms-loadbalancer-lbrules/azuredeploy.json
+  probe_id                       = "${azurerm_lb.loadbalancer.id}/probes/${azurerm_lb_probe.k8s_api.name}"
   idle_timeout_in_minutes        = 5
   disable_outbound_snat          = false
   load_distribution              = "SourceIPProtocol"
@@ -40,8 +42,9 @@ resource "azurerm_lb_rule" "additional_ports" {
   backend_port                   = local.additional_node_rules_backend_ports[count.index]
   frontend_ip_configuration_name = azurerm_lb.loadbalancer.frontend_ip_configuration.0.name
   backend_address_pool_id        = azurerm_lb_backend_address_pool.nodes.id
-  // KNOWN ISSUE - see README.MD
-  // probe_id                    = "${azurerm_lb_probe.ingress_controller.id}}"
+  //https://github.com/hashicorp/terraform/issues/9311#issuecomment-254068526
+  //https://github.com/Azure/azure-quickstart-templates/blob/master/201-2-vms-loadbalancer-lbrules/azuredeploy.json
+  probe_id                       = "${azurerm_lb.loadbalancer.id}/probes/${azurerm_lb_probe.additional_node_probes.*.name[count.index]}"
   idle_timeout_in_minutes        = 5
   disable_outbound_snat          = false
   load_distribution              = "SourceIPProtocol"

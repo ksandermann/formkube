@@ -4,7 +4,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name             = var.out_platform_rg_name
   dns_prefix                      = "api-${var.cluster_name}"
   kubernetes_version              = var.aks_cluster_k8s_version
-  node_resource_group             = "${var.platform_fqdn}_ClusterResources"
+  node_resource_group             = "${var.out_platform_rg_name}_ClusterResources"
   tags                            = var.platform_resource_tags
 
   agent_pool_profile {
@@ -39,15 +39,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
   role_based_access_control {
     enabled                       = true
 
-
-    //idea: service principal used for terraform not enough permissions to see the service principal in AD ?
     //https://github.com/terraform-providers/terraform-provider-azuread/issues/4#issuecomment-407542721
     azure_active_directory {
       client_app_id               = var.aks_cluster_k8s_ad_client_app_id
       server_app_id               = var.aks_cluster_k8s_ad_server_app_id
       server_app_secret           = var.aks_cluster_k8s_ad_server_app_secret
-      //todo get this from environment variable
-      //tenant_id ="abdef"
+      tenant_id                   = var.aks_cluster_k8s_ad_tenant_id
     }
   }
 

@@ -1,5 +1,4 @@
 # Known Issues
-* [lb_rules not referencing lb_probes](https://github.com/ksandermann/formkube/issues/1)
 
 * [azurerm_lb not supporting zone-redundancy](https://github.com/ksandermann/formkube/issues/2)
 

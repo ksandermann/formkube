@@ -40,6 +40,12 @@ variable "aks_cluster_k8s_serviceaccount_client_secret" {
   description = "ClientSecret of the Service Principal Used for the Kubernetes Cloud Provider"
 }
 
+variable "aks_cluster_k8s_ad_tenant_id" {
+  type = "string"
+  description = "Tenant ID of the Azure AD Tenant that will be integrated with AKS RBAC."
+}
+
+
 variable "aks_cluster_k8s_ad_client_app_id" {
   type = "string"
   description = "AppID of the Azure AD Client Application used to integrate Kubernetes with Azure AD."

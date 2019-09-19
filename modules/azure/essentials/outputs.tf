@@ -9,3 +9,8 @@ output "out_platform_dns_zone_name" {
   value       = azurerm_dns_zone.platform.name
   description = "Name of the dns zone that was created."
 }
+
+output "out_platform_dns_zone_name_servers" {
+  value       = azurerm_dns_zone.platform.name_servers
+  description = "A list of values that make up the NS record for the zone."
+}

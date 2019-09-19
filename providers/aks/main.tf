@@ -1,13 +1,13 @@
 terraform {
-  required_version = "0.12.6"
+  required_version = "0.12.8"
 }
 
 provider "azurerm" {
-  version = "~> 1.32.1"
+  version = "~> 1.33.1"
 }
 
 provider "azuread" {
-  version = "~> 0.5.1"
+  version = "~> 0.6.0"
 }
 
 provider "random" {
@@ -78,6 +78,7 @@ module "cluster" {
   aks_nodes_vm_prefix = var.aks_nodes_vm_prefix
   aks_nodes_vm_type = var.aks_nodes_vm_type
 
+  aks_cluster_k8s_ad_tenant_id = var.aks_cluster_k8s_ad_tenant_id
   aks_cluster_k8s_ad_client_app_id = var.aks_cluster_k8s_ad_client_app_id
   aks_cluster_k8s_ad_server_app_id = var.aks_cluster_k8s_ad_server_app_id
   aks_cluster_k8s_ad_server_app_secret = var.aks_cluster_k8s_ad_server_app_secret
@@ -88,4 +89,5 @@ module "cluster" {
   loadbalancer_dns_ops_default_cnames =var.loadbalancer_dns_ops_default_cnames
   loadbalancer_dns_ttl = var.loadbalancer_dns_ttl
   out_platform_dns_zone_name = module.essentials.out_platform_dns_zone_name
+
 }
