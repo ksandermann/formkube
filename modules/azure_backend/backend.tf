@@ -24,7 +24,6 @@ resource "azurerm_storage_account" "backend" {
   account_replication_type  = "LRS"
   tags                      = var.platform_resource_tags
   lifecycle {
-    prevent_destroy         = true
     ignore_changes          = [
       name
     ]
@@ -36,7 +35,6 @@ resource "azurerm_storage_container" "backend" {
   storage_account_name      = azurerm_storage_account.backend.name
   container_access_type     = "private"
   lifecycle {
-    prevent_destroy         = true
     ignore_changes          = [
       name
     ]

@@ -76,4 +76,4 @@ fi
 
 echo "Setting loglevel to $FORMKUBE_LOGLEVEL..."
 export TF_LOG="$FORMKUBE_LOGLEVEL"
-export TF_LOG_PATH="clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.log"
+export TF_LOG_PATH="/root/project/clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.log"

@@ -18,13 +18,12 @@ source /root/project/scripts/internal/init.sh
 source /root/project/scripts/internal/plan.sh
 
 
-terraform apply clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
+terraform apply /root/project/clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
 
 
 if [ "$FORMKUBE_PROVIDER" == "aks" ]; then
 
-terraform output admin_kube_config
 terraform output user_kube_config
+terraform output admin_kube_config
 
 fi
-

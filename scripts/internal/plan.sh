@@ -11,15 +11,14 @@ if [ "$FORMKUBE_PROVIDER" == "aks" ]; then
       echo -e "Caution: FormKube is running in development mode. Disabling backup."
       echo -e "\e[39m\e[0m\e[49m\n"
       terraform plan \
-      -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
-      -out clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
+      -var-file=/root/project/clusters/$FORMKUBE_CLUSTER/vars.tfvars \
+      -out /root/project/clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
       -var aks_cluster_k8s_serviceaccount_client_id=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID \
       -var aks_cluster_k8s_serviceaccount_client_secret=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_SECRET \
       -var aks_cluster_k8s_ad_server_app_secret=$FORMKUBE_AAD_SERVER_APPLICATION_SECRET \
       -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
       -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
-      -var aks_cluster_k8s_ad_tenant_id=$FORMKUBE_TENANT_ID \
-      providers/$FORMKUBE_PROVIDER
+      -var aks_cluster_k8s_ad_tenant_id=$FORMKUBE_TENANT_ID
   else
       terraform plan \
       -var aks_cluster_k8s_serviceaccount_client_id=$FORMKUBE_AKS_SERVICE_PRINCIPAL_CLIENT_ID \
@@ -28,9 +27,8 @@ if [ "$FORMKUBE_PROVIDER" == "aks" ]; then
       -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
       -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
       -var aks_cluster_k8s_ad_tenant_id=$FORMKUBE_TENANT_ID \
-      -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
-      -out clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
-      providers/$FORMKUBE_PROVIDER
+      -var-file=/root/project/clusters/$FORMKUBE_CLUSTER/vars.tfvars \
+      -out /root/project/clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
   fi
 fi
 
@@ -44,19 +42,17 @@ if [ "$FORMKUBE_PROVIDER" == "azure" ]; then
       echo -e "Caution: FormKube is running in development mode. Disabling backup."
       echo -e "\e[39m\e[0m\e[49m\n"
       terraform plan \
-      -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
-      -out clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
+      -var-file=/root/project/clusters/$FORMKUBE_CLUSTER/vars.tfvars \
+      -out /root/project/clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
       -var masters_os_disk_delete_on_destroy=true \
       -var masters_backup_enabled=false \
       -var computenodes_backup_enabled=false \
       -var infranodes_backup_enabled=false \
-      -var bastions_backup_enabled=false \
-      providers/$FORMKUBE_PROVIDER
+      -var bastions_backup_enabled=false
   else
       terraform plan \
-      -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
-      -out clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan \
-      providers/$FORMKUBE_PROVIDER
+      -var-file=/root/project/clusters/$FORMKUBE_CLUSTER/vars.tfvars \
+      -out /root/project/clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
   fi
 fi
 

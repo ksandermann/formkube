@@ -17,6 +17,7 @@ The following resources will **not** be destroyed when running FormKube's destro
 1. DNS zone
 1. If *masters_os_disk_delete_on_destroy* is **not** explicitly to *true*, the OS disks of the masters will also not be
 destroyed.
+1. The Terraform Remote State Backend. To do so, please refer to [Deleting the Backend](./azure_backend.md)
 
 If you want to quickly test various configurations and don't want to manually delete these values after each apply,
 check out [FormKube's Development Mode](dev_mode.md).

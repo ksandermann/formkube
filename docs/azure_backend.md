@@ -1,6 +1,12 @@
 # Creating the Terraform Remote State Azure Backend
 
--link zu generellen doku
+FormKube uses the Terraform Azure Remote State Backend [azurerm](https://www.terraform.io/docs/backends/types/azurerm.html)
+to store its state.
+
+It is mandatory to work with the azurerm backend. Local statefiles are not supported anymore in FormKube > 3.0.0.
+
+For more information on Terraform Remote State Backends, please refer to the [official Docs](https://www.terraform.io/docs/state/remote.html).
+
 
 ## Creating the Backend
 
@@ -27,17 +33,23 @@ It is also possible to use an existing Azure Storage Account and Azure Storage C
 To do so, simply put your configuration inside clusters/$FORMKUBE_CLUSTER/backendconfig and skip above step to create
 the backend.
 
-Exemplary backendconfig's can be found the the clusters folder inside this repo.
+Exemplary backendconfig's can be found in the *clusters* folder inside this repo.
 
 NOTE: FormKube authenticates itself with the backend using the Service Principal you provide it to run terraform.
 Please ensure that the Service Principal has the correct permissions to access the Azure Storage Account and 
 Azure Storage Container and that the Tenant ID and Subscription ID match.
 
+## Deleting the Backend
+
+Deleting the backend Azure Storage Account and Azure Storage Container can be done with FormKube:
+
+```bash
+
+bash ./scripts/delete_backend.sh
+
+```
+
+Important: Running *./scripts/destroy.sh* does not include deleting the backend.
 
 # Authors
 1. [ksandermann](https://github.com/ksandermann)
-
-
-was passiert bei destroy mit den state stores
-terraform init nochmal laufen lassen ? -> gibts uninitialihze?
-destroy testen
