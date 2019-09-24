@@ -2,8 +2,6 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-
-
 source /root/project/scripts/internal/az_login.sh
 
 terraform init \
@@ -31,5 +29,3 @@ echo resource_group_name = \"$FORMKUBE_BACKEND_RG_NAME\" > clusters/$FORMKUBE_CL
 echo storage_account_name = \"$FORMKUBE_BACKEND_SA_NAME\" >> clusters/$FORMKUBE_CLUSTER/backendconfig
 
 echo container_name = \"$FORMKUBE_BACKEND_SC_NAME\" >> clusters/$FORMKUBE_CLUSTER/backendconfig
-
-
