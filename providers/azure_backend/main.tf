@@ -1,5 +1,5 @@
 terraform {
-  required_version = "0.12.8"
+  required_version = "0.12.9"
 }
 
 provider "azurerm" {
@@ -7,7 +7,7 @@ provider "azurerm" {
 }
 
 locals {
-  cluster_fqdn                    = "${var.cluster_name}.${var.cluster_domain}"
+  cluster_fqdn = "${var.cluster_name}.${var.cluster_domain}"
 
   platform_default_resource_tags  = {
     "ClusterName"     = var.cluster_name,
@@ -16,7 +16,7 @@ locals {
     "ClusterStage"    = var.platform_staging_environment
   }
 
-  platform_all_resource_tags      = merge(local.platform_default_resource_tags,var.platform_resource_tags_additional)
+  platform_all_resource_tags = merge(local.platform_default_resource_tags,var.platform_resource_tags_additional)
 }
 
 module "azure_backend" {

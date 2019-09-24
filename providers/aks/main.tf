@@ -1,11 +1,12 @@
 terraform {
-  required_version = "0.12.8"
+  required_version = "0.12.9"
   backend "azurerm" {
     key   = "clusterstate.tfstate"
   }
 }
 
 provider "azurerm" {
+  //Important when updating this: https://github.com/terraform-providers/terraform-provider-azurerm/pull/4286
   version = "~> 1.33.1"
 }
 
