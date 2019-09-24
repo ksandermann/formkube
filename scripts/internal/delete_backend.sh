@@ -16,3 +16,5 @@ terraform state rm \
 terraform destroy \
   -var-file=/root/project/clusters/$FORMKUBE_CLUSTER/vars.tfvars \
   -state=/root/project/clusters/$FORMKUBE_CLUSTER/backend.tfstate
+
+rm -rf /root/project/clusters/$FORMKUBE_CLUSTER/backend.plan || true
