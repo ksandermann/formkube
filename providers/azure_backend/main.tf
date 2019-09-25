@@ -22,8 +22,9 @@ locals {
 module "azure_backend" {
   source                  = "../../modules/azure_backend"
 
-  platform_location       = var.platform_location
-  state_rg_name           = var.state_rg_name
-  cluster_fqdn            = local.cluster_fqdn
-  platform_resource_tags  = local.platform_all_resource_tags
+  backend_resourcegroup_name = var.backend_resourcegroup_name
+  backend_storageaccount_name = var.backend_storageaccount_name
+  backend_storagecontainer_name = var.backend_storagecontainer_name
+  platform_location = var.platform_location
+  platform_resource_tags = local.platform_all_resource_tags
 }
