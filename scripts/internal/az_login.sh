@@ -6,7 +6,7 @@ IFS=$'\n\t'
 
 #shoutout to https://stackoverflow.com/a/13864829
 #check if running in automation and all vars have been set through envs
-if [ -z ${FORMKUBE_SUBSCRIPTION_ID+x} ] && [ -z ${FORMKUBE_CLIENT_ID+x} ] && [ -z ${FORMKUBE_CLIENT_SECRET+x} ] && [ -z ${FORMKUBE_TENANT_ID+x} ]; then
+if [ -z ${FORMKUBE_SUBSCRIPTION_ID+x} ] || [ -z ${FORMKUBE_CLIENT_ID+x} ] || [ -z ${FORMKUBE_CLIENT_SECRET+x} ] || [ -z ${FORMKUBE_TENANT_ID+x} ]; then
     fk_int_automation=false
 else
     fk_int_automation=true
