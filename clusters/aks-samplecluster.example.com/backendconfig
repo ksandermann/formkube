@@ -1,0 +1,3 @@
+resource_group_name = "FormKubeStates"
+storage_account_name = "akssampleclusterexamplec"
+container_name = "aks-samplecluster-example-com"

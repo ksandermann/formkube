@@ -4,9 +4,9 @@ IFS=$'\n\t'
 
 source /root/project/scripts/internal/az_login.sh
 
-terraform init providers/$FORMKUBE_PROVIDER
+source /root/project/scripts/internal/init.sh
 
-export FORMKUBE_MASTER_DISKS_DELETED=$(terraform output -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate -json out_masters_os_disk_delete_on_destroy)
+export FORMKUBE_MASTER_DISKS_DELETED=$(terraform output -json out_masters_os_disk_delete_on_destroy)
 
 if [ "$FORMKUBE_PROVIDER" == "aks" ]; then
 

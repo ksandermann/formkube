@@ -12,19 +12,18 @@ fi
 source /root/project/scripts/internal/az_login.sh
 
 
-terraform init -input=false providers/$FORMKUBE_PROVIDER
+source /root/project/scripts/internal/init.sh
 
 
 source /root/project/scripts/internal/plan.sh
 
 
-terraform apply -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
+terraform apply /root/project/clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.plan
 
 
 if [ "$FORMKUBE_PROVIDER" == "aks" ]; then
 
-terraform output -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate admin_kube_config
-terraform output -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate user_kube_config
+terraform output user_kube_config
+terraform output admin_kube_config
 
 fi
-

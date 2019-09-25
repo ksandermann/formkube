@@ -16,9 +16,7 @@ if [ "$FORMKUBE_DEVELOPMENT_MODE" == "true" ]; then
     -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
     -var aks_cluster_k8s_ad_tenant_id=$FORMKUBE_TENANT_ID \
     -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
-    -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
-    -auto-approve \
-    providers/$FORMKUBE_PROVIDER
+    -auto-approve
 else
 
     terraform destroy \
@@ -28,8 +26,5 @@ else
     -var aks_cluster_k8s_ad_client_app_id=$FORMKUBE_AAD_CLIENT_APPLICATION_ID \
     -var aks_cluster_k8s_ad_server_app_id=$FORMKUBE_AAD_SERVER_APPLICATION_ID \
     -var aks_cluster_k8s_ad_tenant_id=$FORMKUBE_TENANT_ID \
-    -var-file=clusters/$FORMKUBE_CLUSTER/vars.tfvars \
-    -state=clusters/$FORMKUBE_CLUSTER/$FORMKUBE_CLUSTER.tfstate \
-    providers/$FORMKUBE_PROVIDER
-
+    -var-file=/root/project/clusters/$FORMKUBE_CLUSTER/vars.tfvars
 fi

@@ -1,8 +1,12 @@
 terraform {
-  required_version = "0.12.8"
+  required_version = "0.12.9"
+  backend "azurerm" {
+    key   = "clusterstate.tfstate"
+  }
 }
 
 provider "azurerm" {
+  //Important when updating this: https://github.com/terraform-providers/terraform-provider-azurerm/pull/4286
   version = "~> 1.33.1"
 }
 
@@ -27,7 +31,6 @@ locals {
   platform_all_resource_tags = merge(local.platform_default_resource_tags,var.platform_resource_tags_additional)
 }
 
-
 module "essentials" {
   source = "../../modules/aks/essentials"
   platform_fqdn = local.cluster_fqdn
@@ -36,7 +39,7 @@ module "essentials" {
   platform_rg_name = var.platform_rg_name
 }
 
-//todo: re-enable this when terraform supported granting admin consent
+//todo: re-enable this when terraform supports granting admin consent
 //module "aad" {
 //  source = "../../modules/aks/aad"
 //

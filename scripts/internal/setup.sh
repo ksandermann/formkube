@@ -3,7 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 #https://github.com/ksandermann/cloud-toolbox
-export FORMKUBE_BOOTSTRAP_ENVIRONMENT="ksandermann/cloud-toolbox:2019-09-17_01"
+export FORMKUBE_BOOTSTRAP_ENVIRONMENT="ksandermann/cloud-toolbox:2019-09-19_01"
 
 
 if [ -z ${FORMKUBE_CLUSTER+x} ]; then

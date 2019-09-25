@@ -15,6 +15,7 @@ It is basically the result of me teaching myself Terraform and Azure. :)
 ## Prerequisites to Bootstrap a Platform
 1. [Azure Credential Configuration](docs/credentials.md)
 1. [Bootstrapping Prerequisites](docs/prerequisites.md)
+1. [Creating the Terraform Remote State Azure Backend](docs/azure_backend.md)
 
 
 ## Installation Guide
@@ -52,6 +53,7 @@ It is basically the result of me teaching myself Terraform and Azure. :)
     export FORMKUBE_CLIENT_ID=abcde-abcde-abcde-abcde
     export FORMKUBE_CLIENT_SECRET=abcde-abcde-abcde-abcde
     export FORMKUBE_TENANT_ID=abcde-abcde-abcde-abcde
+    bash ./scripts/create_backend.sh
     bash ./scripts/apply.sh
     ```
 
@@ -70,6 +72,8 @@ It is basically the result of me teaching myself Terraform and Azure. :)
     #optional
     #export FORMKUBE_AAD_SERVER_APPLICATION_ID=abcde-abcde-abcde-abcde
     #export FORMKUBE_AAD_CLIENT_APPLICATION_ID=abcde-abcde-abcde-abcde
+ 
+    bash ./scripts/create_backend.sh
     bash ./scripts/apply.sh
     ```
 
