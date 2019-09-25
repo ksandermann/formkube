@@ -19,9 +19,16 @@ bash ./scripts/create_backend.sh
 ```
 
 The configuration of the Azure Storage Account and Azure Storage Container will be auto-generated using the vars defined
-in the vars.tf of the cluster, such as the *cluster_name* and *cluster_domain*.
-The resource group in which the state will be placed defaults to *FormKubeStates*.
-It can also be explicitly defined/changed by setting *state_rg_name* in the cluster's vars.tf.
+in the vars.tf of the cluster:
+
+```
+backend_resourcegroup_name="samplecluster-prd.example.comFormKubeState"`
+
+backend_storageaccount_name="samplecluster-prd.example.com"
+
+backend_storagecontainer_name="samplecluster-prd.example.com"
+```
+
 
 In the background, FormKube will generate a backendconfig inside clusters/$FORMKUBE_CLUSTER/backendconfig which will
 then later be used when applying the cluster.

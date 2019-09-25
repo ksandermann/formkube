@@ -1,8 +1,18 @@
-variable "state_rg_name" {
+variable "backend_resourcegroup_name" {
   type        = "string"
   description = "Name of the resource group to create for the backend storage account."
-  default     = "FormKubeStates"
 }
+
+variable "backend_storageaccount_name" {
+  type        = "string"
+  description = "Name of the backend storage account."
+}
+
+variable "backend_storagecontainer_name" {
+  type        = "string"
+  description = "Name of the backend storage container."
+}
+
 
 variable "platform_location" {
   type        = "string"
