@@ -3,7 +3,7 @@
 FormKube uses the Terraform Azure Remote State Backend [azurerm](https://www.terraform.io/docs/backends/types/azurerm.html)
 to store its state.
 
-It is mandatory to work with the azurerm backend. Local statefiles are not supported anymore in FormKube > 3.0.0.
+It is mandatory to work with the azurerm backend. Local statefiles are not supported anymore in FormKube >= 3.0.0.
 
 For more information on Terraform Remote State Backends, please refer to the [official Docs](https://www.terraform.io/docs/state/remote.html).
 
